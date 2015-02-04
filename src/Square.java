@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -7,7 +8,7 @@ import javax.swing.JLabel;
 
 /**
  * Square class for chess
- * @author ar339
+ * @author Andrew J Rigg, Cameron A. Craig
  *
  */
 public class Square extends JLabel implements MouseListener{
@@ -17,6 +18,7 @@ public class Square extends JLabel implements MouseListener{
 	String squareName;
 	char [] columns = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
 	String cols = "ABCDEFG";
+	boolean selected = true;
 	
 	
 	public Square(ChessPiece piece, int [] coordinateXY, Color colour){
@@ -29,6 +31,7 @@ public class Square extends JLabel implements MouseListener{
 		if(this.piece != null){
 			this.setIcon(piece.getIcon());
 		}
+		this.addMouseListener(this);
 		//squareName = createSquareName(coordinateXY[0], coordinateXY[1]);
 	}
 
@@ -38,15 +41,17 @@ public class Square extends JLabel implements MouseListener{
 	}
 
 	public void addPiece(ChessPiece chessPiece) {
+		if(chessPiece == null){
+			this.setIcon(null);
+		}
 		piece = chessPiece;
 		this.setIcon(piece.getIcon());
-		System.out.println("ICon " + piece.getIcon());
 		
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		System.out.println("Mouse Click");
 		
 	}
 
@@ -72,5 +77,9 @@ public class Square extends JLabel implements MouseListener{
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public ChessPiece getPiece() {
+		return piece;
 	}
 }

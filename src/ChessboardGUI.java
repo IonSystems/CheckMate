@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
 
@@ -15,11 +17,13 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	JPanel main;
 	Square [][] squares;
 	final int BOARDLENGTH = 9; 
+	Square[] selected;
 	
 	
 	public ChessboardGUI(){
 		main = new JPanel(new GridLayout(9,9));
 		squares = new Square [9][9];
+		selected = new Square[2];
 		setUp();
 		setupPieces();
 		this.setResizable(true);
@@ -27,6 +31,25 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		this.add(main);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}
+	private int checkMoveable(){
+		if(selected[0] != null && selected[1] != null){
+			movePiece(selected[0],selected[1]);
+		}else return -1;
+		return 1;
+	}
+	
+	private boolean movePiece(Square from, Square to){
+		if(from.getIcon() == null || to.getIcon() != null){
+			return false;
+		}else{//Possible move
+			to.addPiece(from.getPiece());
+			from.addPiece(null);
+			return true;
+		}
+		
+		
 	}
 	
 	private void setupPieces() {
