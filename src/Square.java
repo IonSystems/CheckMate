@@ -26,6 +26,7 @@ public class Square extends JLabel implements MouseListener{
 	public Square(ChessboardGUI board, ChessPiece piece, int [] coordinateXY, Color colour){
 		super("",SwingConstants.CENTER);
 		this.piece = piece;
+		this.board = board;
 		this.coordinate = coordinateXY;
 		this.setBackground(colour);
 		this.setOpaque(true);
@@ -56,15 +57,18 @@ public class Square extends JLabel implements MouseListener{
 	public void addPiece(ChessPiece chessPiece) {
 		if(chessPiece == null){
 			this.setIcon(null);
+		}else{
+			piece = chessPiece;
+			this.setIcon(piece.getIcon());
 		}
-		piece = chessPiece;
-		this.setIcon(piece.getIcon());
+		
 		
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("Mouse Click: " + this.squareName);
+		board.checkMoveable(this);
 		
 	}
 

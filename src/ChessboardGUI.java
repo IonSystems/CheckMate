@@ -33,10 +33,28 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
-	private int checkMoveable(){
-		if(selected[0] != null && selected[1] != null){
+	protected int checkMoveable(Square square){
+		if(selected[0] == null && selected[1] == null){
+			if(square.getIcon() != null){
+				selected[0] = square;
+				return 0;
+			}
+		}
+		else if(selected[0] != null && selected[1] != null){
 			movePiece(selected[0],selected[1]);
-		}else return -1;
+			selected[0] = null;
+			selected[1] = null;
+			return 1;
+		}else if(selected[0] != null && selected[1] == null){
+			if(square.getIcon() == null){
+				selected[1] = square;
+				movePiece(selected[0],selected[1]);
+				selected[0] = null;
+				selected[1] = null;
+				return 1;
+			}
+			
+		}
 		return 1;
 	}
 	
