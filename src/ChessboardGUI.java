@@ -14,7 +14,6 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	Square [][] squares;
 	final int BOARDLENGTH = 9; 
 	
-	
 	public ChessboardGUI(){
 		main = new JPanel(new GridLayout(9,9));
 		squares = new Square [9][9];
@@ -29,10 +28,9 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 	}
-	
-	public static void main (String []args){
-		ChessboardGUI chess = new ChessboardGUI();
 
+	public int getBoardlength(){
+		return BOARDLENGTH;
 	}
 
 	private void setUp() {
@@ -41,9 +39,9 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 			squares[i][0] = new Square(null, temp2, Color.GRAY);
 			main.add(squares[i][0]);
 			for (int j = 1; j < BOARDLENGTH; j++){
-				int [] temp = {i, j-1};
+				int [] temp = {i, j};
 				if (i != 8){
-				if ((i + j)%2 == 0){
+				if ((i + j)%2 != 0){
 					squares[i][j-1]= new Square(null, temp, Color.WHITE);
 					main.add(squares[i][j-1]);
 				}
@@ -61,4 +59,9 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 			main.add(squares[8][k]);
 		}
 		}	
+	
+	public static void main (String []args){
+		ChessboardGUI chess = new ChessboardGUI();
+
+	}
 	}
