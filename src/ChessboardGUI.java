@@ -19,6 +19,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		main = new JPanel(new GridLayout(9,9));
 		squares = new Square [9][9];
 		setUp();
+		setupPieces();
 		this.setResizable(true);
 		this.setSize(1000,1000);
 		this.add(main);
@@ -26,6 +27,11 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	private void setupPieces() {
+		this.squares[1][1].addPiece(new ChessPiece());
+		
+	}
+
 	public void actionPerformed(ActionEvent e) {
 		
 	}

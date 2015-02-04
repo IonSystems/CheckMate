@@ -24,11 +24,17 @@ public class Square extends JLabel{
 		this.setOpaque(true);
 		this.setSize(new Dimension(50,50));
 		this.setVisible(true);
+		if(this.piece != NULL) this.setIcon(piece.getIcon());
 		//squareName = createSquareName(coordinateXY[0], coordinateXY[1]);
 	}
 
 	public String createSquareName(int row, int column){
 		String name = "" + columns[column]+ row+1;
 		return name;
+	}
+
+	public void addPiece(ChessPiece chessPiece) {
+		this.piece = chessPiece;
+		
 	}
 }
