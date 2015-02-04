@@ -18,7 +18,6 @@ public class Square extends JLabel implements MouseListener{
 	ChessPiece piece = new ChessPiece(0, 0, null);
 	String squareName;
 	char [] columns = {' ','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
-	int BOARDLENGTH = 9;
 	String cols = "ABCDEFG";
 	boolean selected = true;
 	int BOARDLENGTH = 9;
