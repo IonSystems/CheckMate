@@ -17,7 +17,11 @@ public class Square extends JLabel implements MouseListener{
 	int [] coordinate = new int [2];
 	ChessPiece piece = new ChessPiece(0, 0, null);
 	String squareName;
+<<<<<<< Upstream, based on origin/master
 	char [] columns = {' ','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
+=======
+	char [] columns = {'0','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
+>>>>>>> 9e25736 Added squarename in constructor
 	String cols = "ABCDEFG";
 	boolean selected = true;
 	ChessboardGUI board;
