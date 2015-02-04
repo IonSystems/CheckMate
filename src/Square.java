@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 
@@ -8,7 +10,7 @@ import javax.swing.JLabel;
  * @author ar339
  *
  */
-public class Square extends JLabel{
+public class Square extends JLabel implements MouseListener{
 
 	int [] coordinate = new int [2];
 	ChessPiece piece = new ChessPiece(0, 0, null);
@@ -24,7 +26,9 @@ public class Square extends JLabel{
 		this.setOpaque(true);
 		this.setSize(new Dimension(50,50));
 		this.setVisible(true);
-		if(this.piece != NULL) this.setIcon(piece.getIcon());
+		if(this.piece != null){
+			this.setIcon(piece.getIcon());
+		}
 		//squareName = createSquareName(coordinateXY[0], coordinateXY[1]);
 	}
 
@@ -34,7 +38,39 @@ public class Square extends JLabel{
 	}
 
 	public void addPiece(ChessPiece chessPiece) {
-		this.piece = chessPiece;
+		piece = chessPiece;
+		this.setIcon(piece.getIcon());
+		System.out.println("ICon " + piece.getIcon());
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

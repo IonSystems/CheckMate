@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -28,7 +30,30 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	}
 	
 	private void setupPieces() {
-		this.squares[1][1].addPiece(new ChessPiece());
+		squares[7][0].addPiece(new ChessPiece(7,0,new ImageIcon("res/RookW.png")));
+		squares[7][7].addPiece(new ChessPiece(7,7,new ImageIcon("res/RookW.png")));
+		squares[0][7].addPiece(new ChessPiece(7,0,new ImageIcon("res/RookB.png")));
+		squares[0][0].addPiece(new ChessPiece(7,7,new ImageIcon("res/RookB.png")));
+		
+		squares[7][1].addPiece(new ChessPiece(7,0,new ImageIcon("res/KnightW.png")));
+		squares[7][6].addPiece(new ChessPiece(7,7,new ImageIcon("res/KnightW.png")));
+		squares[0][6].addPiece(new ChessPiece(0,7,new ImageIcon("res/KnightB.png")));
+		squares[0][1].addPiece(new ChessPiece(0,0,new ImageIcon("res/KnightB.png")));
+		
+		squares[7][2].addPiece(new ChessPiece(7,0,new ImageIcon("res/BishopW.png")));
+		squares[7][5].addPiece(new ChessPiece(7,7,new ImageIcon("res/BishopW.png")));
+		squares[0][5].addPiece(new ChessPiece(0,7,new ImageIcon("res/BishopB.png")));
+		squares[0][2].addPiece(new ChessPiece(0,0,new ImageIcon("res/BishopB.png")));
+		
+		squares[7][3].addPiece(new ChessPiece(7,0,new ImageIcon("res/KingW.png")));
+		squares[7][4].addPiece(new ChessPiece(7,7,new ImageIcon("res/QueenW.png")));
+		squares[0][3].addPiece(new ChessPiece(0,7,new ImageIcon("res/KingB.png")));
+		squares[0][4].addPiece(new ChessPiece(0,0,new ImageIcon("res/QueenB.png")));
+		for(int i = 0 ; i <=7;i++){
+			squares[6][i].addPiece(new ChessPiece(6,i,new ImageIcon("res/PawnW.png")));
+			squares[1][i].addPiece(new ChessPiece(1,i,new ImageIcon("res/PawnB.png")));
+		}
+	
 		
 	}
 
