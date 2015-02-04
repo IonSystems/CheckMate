@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 /**
  * Square class for chess
@@ -12,16 +13,17 @@ import javax.swing.JLabel;
  *
  */
 public class Square extends JLabel implements MouseListener{
-
+	
 	int [] coordinate = new int [2];
 	ChessPiece piece = new ChessPiece(0, 0, null);
 	String squareName;
-	char [] columns = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
+	char [] columns = {' ','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
 	String cols = "ABCDEFG";
 	boolean selected = true;
 	ChessboardGUI board;
 	
 	public Square(ChessboardGUI board, ChessPiece piece, int [] coordinateXY, Color colour){
+		super("",SwingConstants.CENTER);
 		this.piece = piece;
 		this.coordinate = coordinateXY;
 		this.setBackground(colour);
@@ -33,13 +35,21 @@ public class Square extends JLabel implements MouseListener{
 		}
 		this.addMouseListener(this);
 		createSquareName(coordinate[0], coordinate[1]);
-		//squareName = createSquareName(coordinateXY[0], coordinateXY[1]);
+		squareName = createSquareName(coordinateXY[0], coordinateXY[1]);
+		this.setText(squareName);
 	}
 
 	public String createSquareName(int row, int column){
-		String name = "" + columns[column]+ row+1;
+		if(row != 8){
+		String name = "" + columns[column]+ (BOARDLENGTH -row-1);
+		return name;
+		}
+		else {
+		String name = "" + columns[column];
 		squareName = name;
 		return name;
+		}
+
 	}
 
 	public void addPiece(ChessPiece chessPiece) {
