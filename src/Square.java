@@ -20,6 +20,7 @@ public class Square extends JLabel implements MouseListener{
 	char [] columns = {' ','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
 	String cols = "ABCDEFG";
 	boolean selected = true;
+	int BOARDLENGTH = 9;
 	ChessboardGUI board;
 	
 	public Square(ChessboardGUI board, ChessPiece piece, int [] coordinateXY, Color colour){
