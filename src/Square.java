@@ -38,7 +38,7 @@ public class Square extends JLabel implements MouseListener{
 		this.addMouseListener(this);
 		createSquareName(coordinate[0], coordinate[1]);
 		squareName = createSquareName(coordinateXY[0], coordinateXY[1]);
-		this.setText(squareName);
+		//this.setText(squareName);
 	}
 
 	public String createSquareName(int row, int column){

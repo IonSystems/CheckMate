@@ -15,8 +15,15 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 
 	JPanel main;
 	Square[][] squares;
+
+	JMenuBar menuBar;
+	JMenu options, help, file;
+	JMenuItem save, load, exit, difficulty, sound, volume, helpPage, onlineHelp;
 	final int BOARDLENGTH = 9;
 	Square[] selected;
+	int difficultyLevel = 0;
+	int volumeLevel = 40;
+	boolean soundOn = true;
 
 	public ChessboardGUI() {
 		main = new JPanel(new GridLayout(9, 9));
@@ -24,6 +31,40 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		selected = new Square[2];
 		setUp();
 		setupPieces();
+		menuBar = new JMenuBar();
+		options = new JMenu("Options");
+		help = new JMenu("Help");
+		file = new JMenu("File");
+		save = new JMenuItem("Open");
+		save.addActionListener(this);
+		load = new JMenuItem("Load");
+		load.addActionListener(this);
+		exit = new JMenuItem("Exit");
+		exit.addActionListener(this);
+		difficulty = new JMenuItem("Difficulty");
+		difficulty.addActionListener(this);
+		sound = new JMenuItem("Sound On/Off");
+		sound.addActionListener(this);
+		volume = new JMenuItem("Volume");
+		volume.addActionListener(this);
+		helpPage = new JMenuItem("Help Page");
+		helpPage.addActionListener(this);
+		onlineHelp = new JMenuItem("Online Help");
+		onlineHelp.addActionListener(this);
+		file.add(save);
+		file.add(load);
+		file.add(exit);
+		options.add(difficulty);
+		options.add(sound);
+		options.add(volume);
+		help.add(helpPage);
+		help.add(onlineHelp);
+		menuBar.add(file);
+		menuBar.add(options);
+		menuBar.add(help);
+		menuBar.setVisible(true);
+		this.add(main);
+		setJMenuBar(menuBar);
 		this.setResizable(true);
 		this.setSize(1000, 1000);
 		this.add(main);
@@ -68,6 +109,10 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 			to.addPiece(from.getPiece());
 			from.addPiece(null);
 			return true;
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==difficulty){
+			difficultyLevel = ((difficultyLevel+1) % 5);
+			System.out.println("Difficulty is: " + (difficultyLevel+1));
 		}
 
 	}
@@ -113,12 +158,32 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 					"res/PawnW.png")));
 			squares[1][i].addPiece(new ChessPiece(1, i, new ImageIcon(
 					"res/PawnB.png")));
+		
+		if (e.getSource()==exit){
+			System.exit(0);
 		}
 
 	}
 
 	public void actionPerformed(ActionEvent e) {
 
+		if (e.getSource()==onlineHelp){
+			
+			
+		}
+		if (e.getSource()==volume){
+			volumeLevel = ((volumeLevel +10) % 100);
+			System.out.println("Volume is: " + (volumeLevel+10));
+		}
+		if (e.getSource() == sound){
+			soundOn = !soundOn;
+			if (soundOn){
+				System.out.println("Sound is ON");
+			}
+			if (!soundOn){
+				System.out.println("Sound is OFF");
+			}
+		}
 	}
 
 	public static void main(String[] args) {
@@ -130,6 +195,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		for (int i = 0; i < BOARDLENGTH - 1; i++) {
 			int[] temp2 = { i, 0 };
 			squares[i][0] = new Square(this, null, temp2, Color.GRAY);
+			squares[i][0].setText(squares[i][0].squareName);
 			main.add(squares[i][0]);
 			for (int j = 1; j < BOARDLENGTH; j++) {
 				int[] temp = { i, j - 1 };
@@ -150,7 +216,14 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		for (int k = 0; k < BOARDLENGTH; k++) {
 			int[] temp3 = { 8, k };
 			squares[8][k] = new Square(this, null, temp3, Color.GRAY);
+			squares[8][k].setText(squares[8][k].squareName);
 			main.add(squares[8][k]);
+			
 		}
+	}
+
+
+	public static void main(String[] args) {
+		ChessboardGUI chess = new ChessboardGUI();
 	}
 }
