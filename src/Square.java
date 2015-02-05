@@ -12,10 +12,9 @@ import javax.swing.SwingConstants;
 public class Square extends JLabel{
 	
 	int [] coordinate = new int [2];
-	ChessPiece piece = new ChessPiece(0, 0, null);
+	ChessPiece piece = new ChessPiece(0, 0);
 	String squareName;
 	char [] columns = {' ','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
-	String cols = "ABCDEFG";
 	final int BOARDLENGTH = 9;
 	
 	

@@ -18,33 +18,48 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	JPanel main;
 	Square[][] squares;
 	JMenuBar menuBar;
-	JMenu save, help, file, exit;
-	JMenuItem open, load, difficulty;
+	JMenu options, help, file;
+	JMenuItem save, load, exit, difficulty, sound, volume, helpPage, onlineHelp;
 	final int BOARDLENGTH = 9;
+	int difficultyLevel = 0;
+	int volumeLevel = 40;
+	boolean soundOn = true;
 
 	public ChessboardGUI() {
 		main = new JPanel(new GridLayout(9, 9));
 		squares = new Square[9][9];
 		setUp();
 		menuBar = new JMenuBar();
-		save = new JMenu("Save");
+		options = new JMenu("Options");
 		help = new JMenu("Help");
 		file = new JMenu("File");
-		exit = new JMenu("Exit");
-		open = new JMenuItem("Open");
-		open.addActionListener(this);
+		save = new JMenuItem("Open");
+		save.addActionListener(this);
 		load = new JMenuItem("Load");
 		load.addActionListener(this);
+		exit = new JMenuItem("Exit");
+		exit.addActionListener(this);
 		difficulty = new JMenuItem("Difficulty");
 		difficulty.addActionListener(this);
-		file.add(open);
+		sound = new JMenuItem("Sound On/Off");
+		sound.addActionListener(this);
+		volume = new JMenuItem("Volume");
+		volume.addActionListener(this);
+		helpPage = new JMenuItem("Help Page");
+		helpPage.addActionListener(this);
+		onlineHelp = new JMenuItem("Online Help");
+		onlineHelp.addActionListener(this);
+		file.add(save);
 		file.add(load);
-		file.add(difficulty);
-		exit.addActionListener(this);
+		file.add(exit);
+		options.add(difficulty);
+		options.add(sound);
+		options.add(volume);
+		help.add(helpPage);
+		help.add(onlineHelp);
 		menuBar.add(file);
-		menuBar.add(save);
+		menuBar.add(options);
 		menuBar.add(help);
-		menuBar.add(exit);
 		menuBar.setVisible(true);
 		this.add(main);
 		setJMenuBar(menuBar);
@@ -56,15 +71,30 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==difficulty){
-			System.exit(0);
-			System.out.println(5);
-		}
-		//Don't understand why this isn't working!
-		if (e.getSource()==exit){
-			System.out.println("EHH?!");
-			System.exit(0);
+			difficultyLevel = ((difficultyLevel+1) % 5);
+			System.out.println("Difficulty is: " + (difficultyLevel+1));
 		}
 		
+		if (e.getSource()==exit){
+			System.exit(0);
+		}
+		if (e.getSource()==onlineHelp){
+			
+			
+		}
+		if (e.getSource()==volume){
+			volumeLevel = ((volumeLevel +10) % 100);
+			System.out.println("Volume is: " + (volumeLevel+10));
+		}
+		if (e.getSource() == sound){
+			soundOn = !soundOn;
+			if (soundOn){
+				System.out.println("Sound is ON");
+			}
+			if (!soundOn){
+				System.out.println("Sound is OFF");
+			}
+		}
 	}
 
 	public int getBoardlength() {
@@ -99,6 +129,5 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 
 	public static void main(String[] args) {
 		ChessboardGUI chess = new ChessboardGUI();
-
 	}
 }

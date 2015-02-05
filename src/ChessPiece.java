@@ -1,4 +1,4 @@
-import javax.swing.ImageIcon;
+import java.util.ArrayList;
 import javax.swing.JLabel;
 
 /**
@@ -6,19 +6,15 @@ import javax.swing.JLabel;
  */
 public class ChessPiece extends JLabel{
 
-	ImageIcon image;
 	int x;
 	int y;
+	int points;
+	ArrayList<Integer[]> available = new ArrayList<Integer[]>();
 	public ChessPiece(){};
 	
-	public ChessPiece(int initX, int initY, ImageIcon image){
-		this.image = image;
+	public ChessPiece(int initX, int initY){
 		this.x = initX;
-		this.y = initY;
-		
-		
+		this.y = initY;	
 	}
-	
-	
 	
 }
