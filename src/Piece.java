@@ -1,4 +1,3 @@
-
 public enum Piece {
-KING(),QUEEN(),ROOK(),BISHOP(),KNIGHT,PAWN();
+	KING(), QUEEN(), ROOK(), BISHOP(), KNIGHT, PAWN();
 }

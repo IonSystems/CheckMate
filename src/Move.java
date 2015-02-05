@@ -1,9 +1,9 @@
 /**
- * @author Cameron A. Craig 
+ * @author Cameron A. Craig
  * 
- * Move defines an individual move for a chess piece.
- * For example a Knight can move 2 forwards and one left. This move will
- * be represented as forward = 2, left = 1, backward = 0, right = 0;
+ *         Move defines an individual move for a chess piece. For example a
+ *         Knight can move 2 forwards and one left. This move will be
+ *         represented as forward = 2, left = 1, backward = 0, right = 0;
  */
 class Move {
 	private int x;
@@ -13,17 +13,23 @@ class Move {
 		this.x = x;
 		this.y = y;
 	}
-	
-	public int getX(){
+
+	public int getX() {
 		return x;
 	}
-	public int getY(){
+
+	public int getY() {
 		return y;
 	}
-	public void setX(int x){
+
+	public void setX(int x) {
 		this.x = x;
 	}
-	public void setY(int y){
+
+	public void setY(int y) {
 		this.y = y;
+	}
+	public String toString(){
+		return "Move x:" + x + " Move y:" + y ;
 	}
 }
