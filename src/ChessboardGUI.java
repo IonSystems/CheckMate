@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -15,7 +17,8 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 
 	JPanel main;
 	Square[][] squares;
-
+	ArrayList<ChessPiece> whiteTaken;
+	ArrayList<ChessPiece> blackTaken;
 	JMenuBar menuBar;
 	JMenu options, help, file;
 	JMenuItem save, load, exit, difficulty, sound, volume, helpPage,
@@ -27,6 +30,8 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	boolean soundOn = true;
 
 	public ChessboardGUI() {
+		whiteTaken = new ArrayList<ChessPiece>();
+		blackTaken = new ArrayList<ChessPiece>();
 		main = new JPanel(new GridLayout(9, 9));
 		squares = new Square[9][9];
 		selected = new Square[2];
@@ -94,7 +99,7 @@ Color firstSelected = null;
 			selected[1] = null;
 			return 1;
 		} else if (selected[0] != null && selected[1] == null) {
-			if (square.getIcon() == null/* && rulesAdheredTo(selected[0], square)*/) {
+			if (true/* && rulesAdheredTo(selected[0], square)*/) {
 				selected[1] = square;
 				movePiece(selected[0], selected[1]);
 				selected[0].setBackground(firstSelected);
@@ -135,6 +140,28 @@ Color firstSelected = null;
 	}
 
 	private boolean takePiece(Square from, Square to) {
+		
+		boolean valid = true;
+		if(false) valid = false;//from.getPiece().getColour() == to.getPiece().getColour()
+		if(valid){
+			
+			boolean takenColour = to.getPiece().getColour();
+			if(takenColour == true){
+				whiteTaken.add(to.getPiece());
+				
+				squares[8][whiteTaken.size()].addPiece(to.getPiece());
+			}if(takenColour == false){
+				blackTaken.add(to.getPiece());
+				
+				squares[8][blackTaken.size()].addPiece(to.getPiece());
+			}
+			
+			to.addPiece(from.getPiece());
+			from.addPiece(null);
+			
+			System.out.println("Piece Taken!");
+		}
+		System.out.println("Piece to be taken!");
 		return false;
 		// TODO Auto-generated method stub
 		
