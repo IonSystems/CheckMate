@@ -83,7 +83,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		}
 		/*
 		 * This should never happen, because as soon as the selected pieces are
-		 * full, the mov eis made and the selected pieces set back to null
+		 * full, the move is made and the selected pieces set back to null
 		 */
 		else if (selected[0] != null && selected[1] != null) {
 			movePiece(selected[0], selected[1]);
@@ -104,6 +104,13 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	}
 
 	private boolean movePiece(Square from, Square to) {
+		ChessPiece pieceBeingMoved = from.getPiece();
+		Piece type = pieceBeingMoved.getType();
+		switch(type){
+			case KNIGHT:
+				
+				break;
+		}
 		if (from.getIcon() == null || to.getIcon() != null) {
 			return false;
 		} else {// Possible move
@@ -114,45 +121,45 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	}
 
 	private void setupPieces() {
-		squares[7][0].addPiece(new ChessPiece(7, 0, new ImageIcon(
+		squares[7][0].addPiece(new ChessPiece(Piece.ROOK,7, 0, new ImageIcon(
 				"res/RookW.png")));
-		squares[7][7].addPiece(new ChessPiece(7, 7, new ImageIcon(
+		squares[7][7].addPiece(new ChessPiece(Piece.ROOK,7, 7, new ImageIcon(
 				"res/RookW.png")));
-		squares[0][7].addPiece(new ChessPiece(7, 0, new ImageIcon(
+		squares[0][7].addPiece(new ChessPiece(Piece.ROOK,7, 0, new ImageIcon(
 				"res/RookB.png")));
-		squares[0][0].addPiece(new ChessPiece(7, 7, new ImageIcon(
+		squares[0][0].addPiece(new ChessPiece(Piece.ROOK,7, 7, new ImageIcon(
 				"res/RookB.png")));
 
-		squares[7][1].addPiece(new ChessPiece(7, 0, new ImageIcon(
+		squares[7][1].addPiece(new ChessPiece(Piece.KNIGHT,7, 0, new ImageIcon(
 				"res/KnightW.png")));
-		squares[7][6].addPiece(new ChessPiece(7, 7, new ImageIcon(
+		squares[7][6].addPiece(new ChessPiece(Piece.KNIGHT,7, 7, new ImageIcon(
 				"res/KnightW.png")));
-		squares[0][6].addPiece(new ChessPiece(0, 7, new ImageIcon(
+		squares[0][6].addPiece(new ChessPiece(Piece.KNIGHT,0, 7, new ImageIcon(
 				"res/KnightB.png")));
-		squares[0][1].addPiece(new ChessPiece(0, 0, new ImageIcon(
+		squares[0][1].addPiece(new ChessPiece(Piece.KNIGHT,0, 0, new ImageIcon(
 				"res/KnightB.png")));
 
-		squares[7][2].addPiece(new ChessPiece(7, 0, new ImageIcon(
+		squares[7][2].addPiece(new ChessPiece(Piece.BISHOP,7, 0, new ImageIcon(
 				"res/BishopW.png")));
-		squares[7][5].addPiece(new ChessPiece(7, 7, new ImageIcon(
+		squares[7][5].addPiece(new ChessPiece(Piece.BISHOP,7, 7, new ImageIcon(
 				"res/BishopW.png")));
-		squares[0][5].addPiece(new ChessPiece(0, 7, new ImageIcon(
+		squares[0][5].addPiece(new ChessPiece(Piece.BISHOP,0, 7, new ImageIcon(
 				"res/BishopB.png")));
-		squares[0][2].addPiece(new ChessPiece(0, 0, new ImageIcon(
+		squares[0][2].addPiece(new ChessPiece(Piece.BISHOP,0, 0, new ImageIcon(
 				"res/BishopB.png")));
 
-		squares[7][3].addPiece(new ChessPiece(7, 0, new ImageIcon(
+		squares[7][3].addPiece(new ChessPiece(Piece.KING,7, 0, new ImageIcon(
 				"res/KingW.png")));
-		squares[7][4].addPiece(new ChessPiece(7, 7, new ImageIcon(
+		squares[7][4].addPiece(new ChessPiece(Piece.QUEEN,7, 7, new ImageIcon(
 				"res/QueenW.png")));
-		squares[0][3].addPiece(new ChessPiece(0, 7, new ImageIcon(
+		squares[0][3].addPiece(new ChessPiece(Piece.KING,0, 7, new ImageIcon(
 				"res/KingB.png")));
-		squares[0][4].addPiece(new ChessPiece(0, 0, new ImageIcon(
+		squares[0][4].addPiece(new ChessPiece(Piece.QUEEN,0, 0, new ImageIcon(
 				"res/QueenB.png")));
 		for (int i = 0; i <= 7; i++) {
-			squares[6][i].addPiece(new ChessPiece(6, i, new ImageIcon(
+			squares[6][i].addPiece(new ChessPiece(Piece.PAWN,6, i, new ImageIcon(
 					"res/PawnW.png")));
-			squares[1][i].addPiece(new ChessPiece(1, i, new ImageIcon(
+			squares[1][i].addPiece(new ChessPiece(Piece.PAWN,1, i, new ImageIcon(
 					"res/PawnB.png")));
 		}
 		
