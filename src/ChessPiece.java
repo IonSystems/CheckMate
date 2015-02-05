@@ -1,7 +1,9 @@
+import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.text.Position;
 
 /**
  * Create a chess piece with it's various attributes
@@ -12,6 +14,7 @@ public class ChessPiece{
 	int x;
 	int y;
 	Piece type;
+	boolean whitePiece;
 	ArrayList<Move> validMoves;
 	ArrayList<Position>validPositions;
 	int points;
@@ -30,6 +33,7 @@ public class ChessPiece{
 		this.image = image;
 		this.x = initX;
 		this.y = initY;
+		whitePiece = true;
 		this.board = board;
 		validMoves = new ArrayList<Move>();
 		validPositions = new ArrayList<Position>();
@@ -50,6 +54,31 @@ public class ChessPiece{
 				validMoves.add(new Move(-1,2));
 				validMoves.add(new Move(-1,-2));
 			break;
+			case QUEEN:
+				for (int i = 0; i < 7; i ++){
+					validMoves.add(new Move(0,i));
+					validMoves.add(new Move(i,0));
+					validMoves.add(new Move(0,-i));
+					validMoves.add(new Move(-i,0));
+					validMoves.add(new Move(i,i));
+					validMoves.add(new Move(i,-i));
+					validMoves.add(new Move(-i,i));
+					validMoves.add(new Move(-i,-i));
+				}
+			break;
+			case KING:
+				validMoves.add(new Move(0,1));
+				validMoves.add(new Move(0,-1));
+				validMoves.add(new Move(1,1));
+				validMoves.add(new Move(1,-1));
+				validMoves.add(new Move(-1,1));
+				validMoves.add(new Move(-1,-1));
+				validMoves.add(new Move(1,0));
+				validMoves.add(new Move(-1,0));
+			break;
+			case PAWN:
+				
+				validMoves.add(new Move())
 			
 		}
 	}
