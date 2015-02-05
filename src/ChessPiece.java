@@ -13,6 +13,7 @@ public class ChessPiece{
 	ImageIcon image;
 	int x;
 	int y;
+	final int BOARD_DIMENSION = 8;
 	Piece type;
 	boolean whitePiece;
 	ArrayList<Move> validMoves;
@@ -44,6 +45,18 @@ public class ChessPiece{
 	
 	private void setupMoves(){
 		switch(type){
+			case PAWN:
+				if (whitePiece){
+				validMoves.add(new Move(0,-1));
+				validMoves.add(new Move(1, -1));
+				validMoves.add(new Move(-1,-1));
+				}
+				else {
+				validMoves.add(new Move (0,1));
+				validMoves.add(new Move (1,1));
+				validMoves.add(new Move (-1,1));
+				}
+			break;
 			case KNIGHT:
 				validMoves.add(new Move(2,1));
 				validMoves.add(new Move(2,-1));
@@ -54,8 +67,23 @@ public class ChessPiece{
 				validMoves.add(new Move(-1,2));
 				validMoves.add(new Move(-1,-2));
 			break;
+			case BISHOP:
+				for (int i = 0; i < BOARD_DIMENSION; i++){
+					validMoves.add(new Move(i,i));
+					validMoves.add(new Move(i,-i));
+					validMoves.add(new Move(-i,i));
+					validMoves.add(new Move(-i,-i));
+				}
+			break;
+			case ROOK:
+				for (int i = 0; i < BOARD_DIMENSION; i ++){
+					validMoves.add(new Move(0,i));
+					validMoves.add(new Move(i,0));
+					validMoves.add(new Move(0,-i));
+					validMoves.add(new Move(-i,0));
+				}
 			case QUEEN:
-				for (int i = 0; i < 7; i ++){
+				for (int i = 0; i < BOARD_DIMENSION; i ++){
 					validMoves.add(new Move(0,i));
 					validMoves.add(new Move(i,0));
 					validMoves.add(new Move(0,-i));
@@ -76,10 +104,6 @@ public class ChessPiece{
 				validMoves.add(new Move(1,0));
 				validMoves.add(new Move(-1,0));
 			break;
-			case PAWN:
-				
-				validMoves.add(new Move())
-			
 		}
 	}
 	public void findValidPositions(){
