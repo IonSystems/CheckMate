@@ -27,7 +27,7 @@ public class Square extends JLabel{
 		this.setSize(new Dimension(50,50));
 		this.setVisible(true);
 		squareName = createSquareName(coordinateXY[0], coordinateXY[1]);
-		this.setText(squareName);
+		//this.setText(squareName);
 	}
 
 	public String createSquareName(int row, int column){
