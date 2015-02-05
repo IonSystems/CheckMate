@@ -73,10 +73,13 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
-
+Color firstSelected = null;
 	protected int checkMoveable(Square square) {
+		
 		if (selected[0] == null && selected[1] == null) {
 			if (square.getIcon() != null) {
+				firstSelected = square.getBackground();
+				square.setBackground(Color.BLUE);
 				selected[0] = square;
 				return 0;
 			}
@@ -94,6 +97,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 			if (square.getIcon() == null/* && rulesAdheredTo(selected[0], square)*/) {
 				selected[1] = square;
 				movePiece(selected[0], selected[1]);
+				selected[0].setBackground(firstSelected);
 				selected[0] = null;
 				selected[1] = null;
 				return 1;
