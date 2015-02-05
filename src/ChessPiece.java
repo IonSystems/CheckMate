@@ -12,7 +12,7 @@ public class ChessPiece{
 	
 	
 	int points;
-	ArrayList<Integer[]> available = new ArrayList<Integer[]>();
+	
 	public ChessPiece(){};
 	
 	public ChessPiece(int initX, int initY, ImageIcon image){

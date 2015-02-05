@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 //GUI for showing the chess AI
@@ -109,12 +110,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 			to.addPiece(from.getPiece());
 			from.addPiece(null);
 			return true;
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==difficulty){
-			difficultyLevel = ((difficultyLevel+1) % 5);
-			System.out.println("Difficulty is: " + (difficultyLevel+1));
 		}
-
 	}
 
 	private void setupPieces() {
@@ -158,15 +154,20 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 					"res/PawnW.png")));
 			squares[1][i].addPiece(new ChessPiece(1, i, new ImageIcon(
 					"res/PawnB.png")));
-		
-		if (e.getSource()==exit){
-			System.exit(0);
 		}
+		
 
 	}
 
 	public void actionPerformed(ActionEvent e) {
-
+		if (e.getSource()==exit){
+			System.exit(0);
+		}
+	
+		if (e.getSource()==difficulty){
+			difficultyLevel = ((difficultyLevel+1) % 5);
+			System.out.println("Difficulty is: " + (difficultyLevel+1));
+		}
 		if (e.getSource()==onlineHelp){
 			
 			
@@ -188,7 +189,6 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 
 	public static void main(String[] args) {
 		ChessboardGUI chess = new ChessboardGUI();
-
 	}
 
 	private void setUp() {
@@ -223,7 +223,5 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	}
 
 
-	public static void main(String[] args) {
-		ChessboardGUI chess = new ChessboardGUI();
-	}
+	
 }
