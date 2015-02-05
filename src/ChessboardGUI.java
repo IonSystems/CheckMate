@@ -23,7 +23,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	final int BOARDLENGTH = 9;
 	Square[] selected;
 	int difficultyLevel = 0;
-	int volumeLevel = 40;
+	int volumeLevel = 50;
 	boolean soundOn = true;
 
 	public ChessboardGUI() {
@@ -169,12 +169,17 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 			System.out.println("Difficulty is: " + (difficultyLevel+1));
 		}
 		if (e.getSource()==onlineHelp){
-			
+			try {
+			     String url = "http://en.wikipedia.org/wiki/Chess";
+			     java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+			} catch (java.io.IOException err) {
+			     System.out.println(err.getMessage());
+			}
 			
 		}
 		if (e.getSource()==volume){
-			volumeLevel = ((volumeLevel +10) % 100);
-			System.out.println("Volume is: " + (volumeLevel+10));
+			volumeLevel = ((volumeLevel +10) % 110);
+			System.out.println("Volume is: " + (volumeLevel));
 		}
 		if (e.getSource() == sound){
 			soundOn = !soundOn;
