@@ -91,12 +91,14 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 			selected[1] = null;
 			return 1;
 		} else if (selected[0] != null && selected[1] == null) {
-			if (square.getIcon() == null) {
+			if (square.getIcon() == null && rulesAdheredTo(selected[0], square)) {
 				selected[1] = square;
 				movePiece(selected[0], selected[1]);
 				selected[0] = null;
 				selected[1] = null;
 				return 1;
+			}else{
+				System.out.println("Invalid Move");
 			}
 
 		}
@@ -106,11 +108,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	private boolean movePiece(Square from, Square to) {
 		ChessPiece pieceBeingMoved = from.getPiece();
 		Piece type = pieceBeingMoved.getType();
-		switch(type){
-			case KNIGHT:
-				
-				break;
-		}
+		
 		if (from.getIcon() == null || to.getIcon() != null) {
 			return false;
 		} else {// Possible move
@@ -120,6 +118,9 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 			from.addPiece(null);
 			return true;
 		}
+	}
+	private boolean rulesAdheredTo(Square to, Square from){
+		return (to.getPiece().getValidPositions().contains(from.getPosition()));
 	}
 
 	private void setupPieces() {
