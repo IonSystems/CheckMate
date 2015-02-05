@@ -107,19 +107,33 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 
 	private boolean movePiece(Square from, Square to) {
 		ChessPiece pieceBeingMoved = from.getPiece();
-		Piece type = pieceBeingMoved.getType();
+		boolean valid = true;
+		if(from.getPiece() == null) return false;
+		if(from.getPiece().getType() == null) return false;
+		
+		if(to.getPiece() != null){
+			valid = false;
+			return takePiece(from,to);
+			
+		}
 
-		if (from.getIcon() == null || to.getIcon() != null) {
+		/*if (from.getIcon() == null || to.getIcon() != null) {
 			return false;
-		} else if(to.getPiece().getColour() != from.getPiece().getColour()){{// Possible move
+		} else*/ if(valid){// Possible move
 			to.addPiece(from.getPiece());
 			to.getPiece().setPosition(to.getPosition());
 			to.getPiece().findValidPositions();
 			from.addPiece(null);
 			return true;
 		}
-		}
+		
 		return false;
+	}
+
+	private boolean takePiece(Square from, Square to) {
+		return false;
+		// TODO Auto-generated method stub
+		
 	}
 
 	private boolean rulesAdheredTo(Square to, Square from) {

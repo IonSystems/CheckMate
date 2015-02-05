@@ -153,4 +153,10 @@ public class ChessPiece {
 		return ""+ type;
 	}
 
+	public String printValidPositions() {
+		if(validPositions == null || validPositions.isEmpty()) return "No Valid Positions";
+		return validPositions.toString();
+		
+	}
+
 }
