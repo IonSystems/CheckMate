@@ -200,7 +200,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		for (int i = 0; i < BOARDLENGTH - 1; i++) {
 			int[] temp2 = { i, 0 };
 			squares[i][0] = new Square(this, null, temp2, Color.GRAY);
-			squares[i][0].setText(squares[i][0].squareName);
+		//	squares[i][0].setText(squares[i][0].squareName);
 			main.add(squares[i][0]);
 			for (int j = 1; j < BOARDLENGTH; j++) {
 				int[] temp = { i, j - 1 };
@@ -221,7 +221,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		for (int k = 0; k < BOARDLENGTH; k++) {
 			int[] temp3 = { 8, k };
 			squares[8][k] = new Square(this, null, temp3, Color.GRAY);
-			squares[8][k].setText(squares[8][k].squareName);
+			//squares[8][k].setText(squares[8][k].squareName);
 			main.add(squares[8][k]);
 			
 		}
