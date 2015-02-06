@@ -159,8 +159,8 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		 * if (from.getIcon() == null || to.getIcon() != null) { return false; }
 		 * else
 		 */if (valid) {// Possible move
-			to.addPiece(from.getPiece());
-			to.getPiece().setPosition(to.getPosition());
+			to.addPiece(from.getPiece());//Move the piece to the new empty square.
+			to.getPiece().setPosition(to.getPosition());//Update position of piece to the position of the new square
 			to.getPiece().findValidPositions();
 			from.addPiece(null);
 			return true;
@@ -290,7 +290,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	private void setUp() {
 		for (int i = 0; i < BOARDLENGTH; i++) {
 			for (int j = 0; j < BOARDLENGTH; j++) {
-				Position temp = new Position(i, j - 1);
+				Position temp = new Position(i, j);
 					if ((i + j) % 2 == 0) {
 						squares[i][j] = new Square(this, null, temp,
 								Color.WHITE);
