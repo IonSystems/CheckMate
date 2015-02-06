@@ -142,18 +142,19 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	}
 
 	private boolean movePiece(Square from, Square to) {
-		ChessPiece pieceBeingMoved = from.getPiece();
+		//ChessPiece pieceBeingMoved = from.getPiece();
 		boolean valid = true;
 		if (from.getPiece() == null)
 			return false;
 		if (from.getPiece().getType() == null)
 			return false;
 		
-		if (to.getPiece() != null) {
+		if (to.getPiece() != null) { //if there is a piece where we want to go.
 			valid = false;
 			return takePiece(from, to);
+			//Dead
 
-		}
+		}if(to.getBackground() != Color.green) valid = false;
 
 		/*
 		 * if (from.getIcon() == null || to.getIcon() != null) { return false; }
@@ -190,9 +191,11 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 				//squares[7][blackTaken.size()].addPiece(to.getPiece());
 			}
 			to.getPiece().setPlayable(false);
-			to.addPiece(from.getPiece());
+			to.addPiece(from.getPiece());//Move the piece to the new empty square.
+			to.getPiece().setPosition(to.getPosition());//Update position of piece to the position of the new square
+			to.getPiece().findValidPositions();
 			from.addPiece(null);
-
+			
 			System.out.println("Piece Taken!");
 		}
 		System.out.println("Piece to be taken!");
