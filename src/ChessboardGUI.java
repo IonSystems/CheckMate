@@ -23,7 +23,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	JMenu options, help, file;
 	JMenuItem save, load, exit, difficulty, sound, volume, helpPage,
 			onlineHelp;
-	final int BOARDLENGTH = 9;
+	final int BOARDLENGTH = 8;
 	Square[] selected;
 	int difficultyLevel = 0;
 	int volumeLevel = 50;
@@ -32,7 +32,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	public ChessboardGUI() {
 		whiteTaken = new ArrayList<ChessPiece>();
 		blackTaken = new ArrayList<ChessPiece>();
-		main = new JPanel(new GridLayout(9, 9));
+		main = new JPanel(new GridLayout(8, 8));
 		squares = new Square[9][9];
 		selected = new Square[2];
 		setUp();
@@ -110,38 +110,28 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 				selected[0] = null;
 				selected[1] = null;
 				return 1;
-			} else {
-				System.out.println("Invalid Move");
-			}
-
+			} 
 		}
 		return 1;
 	}
 
 	private void resetSquareColors() {
 
-		for (int i = 0; i < BOARDLENGTH - 1; i++) {
+		for (int i = 0; i < BOARDLENGTH; i++) {
 
-			squares[i][0].setBackground(Color.GRAY);
-
-			for (int j = 1; j < BOARDLENGTH; j++) {
+			for (int j = 0; j < BOARDLENGTH; j++) {
 
 				if (i != 8) {
 					if ((i + j) % 2 == 0) {
-						squares[i][j - 1].setBackground(Color.WHITE);
+						squares[i][j].setBackground(Color.WHITE);
 
 					} else {
-						squares[i][j - 1].setBackground(Color.BLACK);
+						squares[i][j].setBackground(Color.BLACK);
 					}
 				}
 			}
 
 		}
-		for (int k = 0; k < BOARDLENGTH; k++) {
-			squares[8][k].setBackground(Color.GRAY);
-
-		}
-
 	}
 
 	private void highlightValidPositions(ChessPiece piece) {
@@ -298,42 +288,33 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	}
 
 	private void setUp() {
-		for (int i = 0; i < BOARDLENGTH - 1; i++) {
-			Position temp2 = new Position(i, 0);
-			squares[i][0] = new Square(this, null, temp2, Color.GRAY);
-			squares[i][0].setText(squares[i][0].squareName);
-			main.add(squares[i][0]);
-			for (int j = 1; j < BOARDLENGTH; j++) {
+		for (int i = 0; i < BOARDLENGTH; i++) {
+			for (int j = 0; j < BOARDLENGTH; j++) {
 				Position temp = new Position(i, j - 1);
-				if (i != 8) {
 					if ((i + j) % 2 == 0) {
-						squares[i][j - 1] = new Square(this, null, temp,
+						squares[i][j] = new Square(this, null, temp,
 								Color.WHITE);
-						main.add(squares[i][j - 1]);
+						main.add(squares[i][j]);
 					} else {
-						squares[i][j - 1] = new Square(this, null, temp,
+						squares[i][j] = new Square(this, null, temp,
 								Color.BLACK);
-						main.add(squares[i][j - 1]);
+						main.add(squares[i][j]);
 					}
 				}
 			}
-
 		}
-		for (int k = 0; k < BOARDLENGTH; k++) {
-			Position temp3 = new Position(8, k);
-			squares[8][k] = new Square(this, null, temp3, Color.GRAY);
-			squares[8][k].setText(squares[8][k].squareName);
-			main.add(squares[8][k]);
-
-		}
-	}
 
 	public boolean isOccupied(Position p) {
-		/*
+		/**
 		 * If a square does not have an icon(icon == null) then there is no
 		 * piece on the square.
 		 */
-		return squares[p.getX()][p.getY()].getIcon() != null;
+		System.out.println("Checking occupation of square [" + p.getX() + "][" + p.getY() + "]");
+		try{
+		return squares[p.getX()][p.getY()].getPiece() != null;
+		}catch(NullPointerException e){
+			return false;
+		}
 	}
 
 }

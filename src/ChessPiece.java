@@ -45,13 +45,13 @@ public class ChessPiece {
 		switch (type) {
 		case PAWN:
 			if (whitePiece) {
-				possibleMoves.add(new Move(0, -1));
-				possibleMoves.add(new Move(1, -1));
+				possibleMoves.add(new Move(-1, 0));
+				possibleMoves.add(new Move(-1, 1));
 				possibleMoves.add(new Move(-1, -1));
 			} else {
-				possibleMoves.add(new Move(0, 1));
+				possibleMoves.add(new Move(1, 0));
 				possibleMoves.add(new Move(1, 1));
-				possibleMoves.add(new Move(-1, 1));
+				possibleMoves.add(new Move(1, -1));
 			}
 			break;
 		case KNIGHT:
@@ -107,18 +107,16 @@ public class ChessPiece {
 
 	public void findValidPositions() {
 		validPositions.clear();
-		//
-		System.out.println(type + " #:" + possibleMoves.size()+ possibleMoves.toString());
 		for (Move m : possibleMoves) {
-			System.out.println(m + ", ");
 			Position possiblePosition = new Position(x + m.getX(), y + m.getY());
 			if (possiblePosition.getX() < 8 && possiblePosition.getX() >= 0
 					&& possiblePosition.getY() < 8
-					&& possiblePosition.getY() >= 0)
-				if (!board.isOccupied(possiblePosition) 
-						&& !validPositions.contains(possiblePosition)) {
+					&& possiblePosition.getY() >= 0){
+				//if (!board.isOccupied(possiblePosition) 
+					//	&& !validPositions.contains(possiblePosition)) {
 					validPositions.add(possiblePosition);
-				}
+				//}
+			}
 		}
 	}
 

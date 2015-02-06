@@ -90,6 +90,7 @@ public class Square extends JLabel implements MouseListener {
 	}
 
 	public ChessPiece getPiece() {
+		if(piece == null) return null;
 		return piece;
 	}
 
