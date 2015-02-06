@@ -15,6 +15,7 @@ public class ChessPiece {
 	ArrayList<Move> possibleMoves;
 	ArrayList<Position> validPositions;
 	int points;
+	boolean playable; //True if still in the game, false if taken.
 
 	// public ChessPiece(){};
 
@@ -24,18 +25,19 @@ public class ChessPiece {
 	 * initY; }
 	 */
 
-	public ChessPiece(Piece type, int initX, int initY, ImageIcon image,
+	public ChessPiece(Piece type, boolean whitePiece, int initX, int initY, ImageIcon image,
 			ChessboardGUI board) {
 		this.type = type;
 		this.image = image;
 		this.x = initX;
 		this.y = initY;
-		whitePiece = true;
+		this.whitePiece = whitePiece;
 		this.board = board;
 		possibleMoves = new ArrayList<Move>();
 		validPositions = new ArrayList<Position>();
 		setupMoves();
 		findValidPositions();
+		playable = true;
 
 	}
 
@@ -156,6 +158,15 @@ public class ChessPiece {
 	public String printValidPositions() {
 		if(validPositions == null || validPositions.isEmpty()) return "No Valid Positions";
 		return validPositions.toString();
+		
+	}
+
+	public boolean isPlayable() {
+		return playable;
+	}
+
+	public void setPlayable(boolean playable) {
+		this.playable = playable;
 		
 	}
 
