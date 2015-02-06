@@ -181,13 +181,13 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 			boolean takenColour = to.getPiece().getColour();
 			if (takenColour == true) {
 				whiteTaken.add(to.getPiece());
-				
-				squares[8][whiteTaken.size()].addPiece(to.getPiece());
+				//Moving taken piece to the edge of the board
+				//squares[7][whiteTaken.size()].addPiece(to.getPiece());
 			}
 			if (takenColour == false) {
 				blackTaken.add(to.getPiece());
-
-				squares[8][blackTaken.size()].addPiece(to.getPiece());
+				//Moving taken piece to the edge of the board
+				//squares[7][blackTaken.size()].addPiece(to.getPiece());
 			}
 			to.getPiece().setPlayable(false);
 			to.addPiece(from.getPiece());
