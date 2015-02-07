@@ -119,8 +119,21 @@ public class ChessPiece {
 	private boolean noJumps(Position possiblePosition, Move possibleMove) {
 		Position startPosition = position;
 		Position endPosition = possiblePosition;
-		System.out.println("Move: " + possibleMove);
-		ArrayList<Square> squaresToCheck = getSquaresOnMove(possibleMove);
+		//System.out.println("Move: " + possibleMove);
+		ArrayList<Square> squaresToCheck = new ArrayList<Square>();
+		squaresToCheck = getSquaresOnMove(possibleMove);
+		try{
+		if(squaresToCheck.isEmpty()) return true; //If there are no squares in the way of the move, there are no jumps.
+		}catch(NullPointerException e){
+			return true;
+		}
+		for(Square s : squaresToCheck){
+			if(s.getPiece() != null){ //if there is a piece in the way of a move
+				//Do not allow move
+				System.out.println("Disbaled Move(" + type + "from " + this.position + " to " + possiblePosition );
+				return false;
+			}
+		}
 		//TODO: Complete this method.
 		return true;
 	}
@@ -131,19 +144,59 @@ public class ChessPiece {
 	 */
 	private ArrayList<Square> getSquaresOnMove(Move possibleMove) {
 		ArrayList<Square> squares = new ArrayList<Square>();
+		int x = possibleMove.getX();
+		int y = possibleMove.getY();
 		/*
 		 * If the move x amount is positive, the move goes right, otherwise left.
 		 * If the move y amount is positive, the move goes down, otherwise up.
+		 * 
+		 * There are no squares 'squares on move' for pawns, because they can only move by one.
+		 * The <b>bishop</b> can move diagonally by any amount as long as the diagonal route is unobstruced.
+		 * The rook can move to any non-obstructed square with in it's row or column.
+		 * The queen combines the moves of the rook and the bishop, so can move across it's row, column and diagonally.
+		 * The king can move one square in any direction, but cannot move to a square resulting in check.
 		 */
-		if(possibleMove.getX() > 0 && possibleMove.getY() > 0){
-		for(int x = 0;x < possibleMove.getX(); x++){
-			for(int y = 0;y < possibleMove.getY(); y++){
-				Position t = addSquareToSquareArray(squares, x, y);
-				System.out.println("Squares on move: " + t);
-			}
+		
+		switch(type){
+		case KING:
 			
+		break;
+		case QUEEN:
+			
+		break;
+		case ROOK:
+			
+		break;
+		case BISHOP://Diagonal, so movement in x and y direction will be equal magnitude.
+			if(x > 0 && y > 0){//The move is going diagonally down to the right.
+				for(int i = 1;i < x;i++){
+					Position positionOnMove = new Position(x+i,y+i);
+					if(positionOnMove.inBounds()) squares.add(board.getSquare(positionOnMove));
+				}				
+			}else if(x < 0 && y < 0){ //The move is going diagonally up to the left.
+				for(int i = -1;i < x;i--){
+					Position positionOnMove = new Position(x+i,y+i);
+					if(positionOnMove.inBounds()) squares.add(board.getSquare(positionOnMove));
+				}
+			}
+			if(!squares.isEmpty()) System.out.println("Bishop move inbetweeners." + squares);
+		break;
+		case KNIGHT:
+			
+		break;
+		case PAWN://No squares between start and end positions of the piece, so we return an empty array.
+			return squares;
+		
 		}
-		}
+//		if(possibleMove.getX() > 0 && possibleMove.getY() > 0){
+//		for(int x = 0;x < possibleMove.getX(); x++){
+//			for(int y = 0;y < possibleMove.getY(); y++){
+//				Position t = addSquareToSquareArray(squares, x, y);
+//				System.out.println("Squares on move: " + t);
+//			}
+//			
+//		}
+//		}
 		
 		return null;
 	}

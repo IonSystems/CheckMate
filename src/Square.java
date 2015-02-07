@@ -98,4 +98,8 @@ public class Square extends JLabel implements MouseListener {
 	public Position getPosition() {
 		return new Position(position.getX(), position.getY());
 	}
+
+	public String toString(){
+		return "" + position.getX() + position.getY();
+	}
 }

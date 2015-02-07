@@ -4,6 +4,9 @@
  *         Move defines an individual move for a chess piece. For example a
  *         Knight can move 2 forwards and one left. This move will be
  *         represented as forward = 2, left = 1, backward = 0, right = 0;
+ *         
+ *         Moves in two dimensions can be executed in two different ways, adding complications for us when it comes to checking whether a move is obstructed by another piece or not.
+ *         
  */
 class Move {
 	private int x;

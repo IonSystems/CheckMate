@@ -15,4 +15,8 @@ class Position {
 	public String toString(){
 		return "x: " + x + " y: " + y;
 	}
+	public boolean inBounds() {
+		if(x < 7 && y < 7 && x >=0 && y >= 0) return true;
+		else return false;
+	}
 }

@@ -196,9 +196,9 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 			to.getPiece().findValidPositions();
 			from.addPiece(null);
 			
-			System.out.println("Piece Taken!");
+			//System.out.println("Piece Taken!");
 		}
-		System.out.println("Piece to be taken!");
+		//System.out.println("Piece to be taken!");
 		return false;
 		// TODO Auto-generated method stub
 
@@ -260,7 +260,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 
 		if (e.getSource() == difficulty) {
 			difficultyLevel = ((difficultyLevel + 1) % 5);
-			System.out.println("Difficulty is: " + (difficultyLevel + 1));
+			//System.out.println("Difficulty is: " + (difficultyLevel + 1));
 		}
 		if (e.getSource() == onlineHelp) {
 			try {
@@ -312,7 +312,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		 * If a square does not have an icon(icon == null) then there is no
 		 * piece on the square.
 		 */
-		System.out.println("Checking occupation of square [" + p.getX() + "][" + p.getY() + "]");
+		//System.out.println("Checking occupation of square [" + p.getX() + "][" + p.getY() + "]");
 		try{
 		return squares[p.getX()][p.getY()].getPiece() != null;
 		}catch(NullPointerException e){
