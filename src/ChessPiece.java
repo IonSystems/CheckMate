@@ -7,8 +7,7 @@ import javax.swing.ImageIcon;
 public class ChessPiece {
 	ChessboardGUI board;
 	ImageIcon image;
-	int x;
-	int y;
+	Position position;
 	final int BOARD_DIMENSION = 8;
 	Piece type;
 	boolean whitePiece;
@@ -25,12 +24,11 @@ public class ChessPiece {
 	 * initY; }
 	 */
 
-	public ChessPiece(Piece type, boolean whitePiece, int initX, int initY, ImageIcon image,
+	public ChessPiece(Piece type, boolean whitePiece,Position position, ImageIcon image,
 			ChessboardGUI board) {
 		this.type = type;
 		this.image = image;
-		this.x = initX;
-		this.y = initY;
+		this.position = position;
 		this.whitePiece = whitePiece;
 		this.board = board;
 		possibleMoves = new ArrayList<Move>();
@@ -108,16 +106,59 @@ public class ChessPiece {
 	public void findValidPositions() {
 		validPositions.clear();
 		for (Move m : possibleMoves) {
-			Position possiblePosition = new Position(x + m.getX(), y + m.getY());
-			if (possiblePosition.getX() < 8 && possiblePosition.getX() >= 0
-					&& possiblePosition.getY() < 8
-					&& possiblePosition.getY() >= 0){
+			Position possiblePosition = new Position(position.getX() + m.getX(), position.getY() + m.getY());
+			if (positionWithinBounds(possiblePosition) && noJumps(possiblePosition,m)){
 				//if (!board.isOccupied(possiblePosition) 
 					//	&& !validPositions.contains(possiblePosition)) {
 					validPositions.add(possiblePosition);
 				//}
 			}
 		}
+	}
+
+	private boolean noJumps(Position possiblePosition, Move possibleMove) {
+		Position startPosition = position;
+		Position endPosition = possiblePosition;
+		System.out.println("Move: " + possibleMove);
+		ArrayList<Square> squaresToCheck = getSquaresOnMove(possibleMove);
+		//TODO: Complete this method.
+		return true;
+	}
+	/**Get all the squares that are travelled upon during a move of a piece, not including the start and end squares.
+	 * 
+	 * @param possibleMove
+	 * @return
+	 */
+	private ArrayList<Square> getSquaresOnMove(Move possibleMove) {
+		ArrayList<Square> squares = new ArrayList<Square>();
+		/*
+		 * If the move x amount is positive, the move goes right, otherwise left.
+		 * If the move y amount is positive, the move goes down, otherwise up.
+		 */
+		if(possibleMove.getX() > 0 && possibleMove.getY() > 0){
+		for(int x = 0;x < possibleMove.getX(); x++){
+			for(int y = 0;y < possibleMove.getY(); y++){
+				Position t = addSquareToSquareArray(squares, x, y);
+				System.out.println("Squares on move: " + t);
+			}
+			
+		}
+		}
+		
+		return null;
+	}
+
+	private Position addSquareToSquareArray(ArrayList<Square> squares, int x,
+			int y) {
+		Position t = new Position(position.getX() + x,position.getY() + y);
+		squares.add(board.getSquare(t));
+		return t;
+	}
+
+	private boolean positionWithinBounds(Position possiblePosition) {
+		return possiblePosition.getX() < 8 && possiblePosition.getX() >= 0
+				&& possiblePosition.getY() < 8
+				&& possiblePosition.getY() >= 0;
 	}
 
 	public void addMove(Move move) {
@@ -137,8 +178,7 @@ public class ChessPiece {
 	}
 
 	public void setPosition(Position position) {
-		this.x = position.getX();
-		this.y = position.getY();
+		this.position = position;
 	}
 
 	public ArrayList<Position> getValidPositions() {
