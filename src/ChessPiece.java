@@ -43,13 +43,13 @@ public class ChessPiece {
 		switch (type) {
 		case PAWN:
 			if (whitePiece) {
-				possibleMoves.add(new Move(-1, 0));
-				possibleMoves.add(new Move(-1, 1));
-				possibleMoves.add(new Move(-1, -1));
+				possibleMoves.add(new Move(-1, 0,false,true)); //Can only move to empty square
+				possibleMoves.add(new Move(-1, 1,true,false)); //Can only take in this move
+				possibleMoves.add(new Move(-1, -1,true,false));
 			} else {
-				possibleMoves.add(new Move(1, 0));
-				possibleMoves.add(new Move(1, 1));
-				possibleMoves.add(new Move(1, -1));
+				possibleMoves.add(new Move(1, 0,false,true));
+				possibleMoves.add(new Move(1, 1,true,false));
+				possibleMoves.add(new Move(1, -1,true,false));
 			}
 			break;
 		case KNIGHT:
@@ -259,6 +259,14 @@ public class ChessPiece {
 	public void setPlayable(boolean playable) {
 		this.playable = playable;
 		
+	}
+	public Move getMove(Position endPosition){
+		for(Move m : possibleMoves){
+			if(position.getX() + m.getX() == endPosition.getX() && position.getY() + m.getY() == endPosition.getY()){
+				return m;
+			}
+		}
+		return null;
 	}
 
 }

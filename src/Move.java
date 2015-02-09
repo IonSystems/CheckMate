@@ -11,10 +11,20 @@
 class Move {
 	private int x;
 	private int y;
+	private boolean takeMove;	//Moving a piece to an occupied square.
+	private boolean normalMove; //A move to an empty square.
 
 	public Move(int x, int y) {
 		this.x = x;
 		this.y = y;
+		this.takeMove = true;
+		this.normalMove = true;
+	}
+	public Move(int x, int y,boolean takeMove, boolean normalMove) {
+		this.x = x;
+		this.y = y;
+		this.takeMove = takeMove;
+		this.normalMove = normalMove;
 	}
 
 	public int getX() {

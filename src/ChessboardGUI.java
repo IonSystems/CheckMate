@@ -81,7 +81,12 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 
 	Color firstSelected = null;
 
-	protected int checkMoveable(Square square) {
+	protected int checkMoveable(Square square, ChessPiece chessPiece) {
+		/*
+		 * square is the square that has been clicked.
+		 * selected[0] is the starting position of the piece.
+		 * selected[1] is the finishing position of the piece.
+		 */
 
 		if (selected[0] == null && selected[1] == null) {
 			if (square.getIcon() != null && square.getPiece().isPlayable()) {
@@ -97,14 +102,15 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		 * full, the move is made and the selected pieces set back to null
 		 */
 		else if (selected[0] != null && selected[1] != null) {
-			movePiece(selected[0], selected[1]);
+			movePiece(selected[0], selected[1],selected[0].getPiece().getMove(selected[1].getPosition()));
 			selected[0] = null;
 			selected[1] = null;
 			return 1;
 		} else if (selected[0] != null && selected[1] == null) {
 			if (true/* && rulesAdheredTo(selected[0], square) */) {
 				selected[1] = square;
-				movePiece(selected[0], selected[1]);
+				//Move move = selected[0].
+				movePiece(selected[0], selected[1],selected[0].getPiece().getMove(selected[1].getPosition()));
 				selected[0].setBackground(firstSelected);
 				resetSquareColors();
 				selected[0] = null;
@@ -141,7 +147,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 
 	}
 
-	private boolean movePiece(Square from, Square to) {
+	private boolean movePiece(Square from, Square to, Move move) {
 		//ChessPiece pieceBeingMoved = from.getPiece();
 		boolean valid = true;
 		if (from.getPiece() == null)
@@ -151,10 +157,10 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		
 		if (to.getPiece() != null) { //if there is a piece where we want to go.
 			valid = false;
-			return takePiece(from, to);
+			return takePiece(from, to, move);
 			//Dead
 
-		}if(to.getBackground() != Color.green) valid = false;
+		}if(to.getBackground() != Color.green) valid = false; //This seems a rather crude way of checking for a valid move.
 
 		/*
 		 * if (from.getIcon() == null || to.getIcon() != null) { return false; }
@@ -170,7 +176,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		return false;
 	}
 
-	private boolean takePiece(Square from, Square to) {
+	private boolean takePiece(Square from, Square to,Move move) {
 
 		boolean valid = true;
 		//System.out.println("Taking:" + from.getPiece().getColour() + ", Taken:" + to.getPiece().getColour());
@@ -204,9 +210,9 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 
 	}
 
-	private boolean rulesAdheredTo(Square to, Square from) {
-		return (to.getPiece().getValidPositions().contains(from.getPosition()));
-	}
+	//private boolean rulesAdheredTo(Square to, Square from) {
+		//return (to.getPiece().getValidPositions().contains(from.getPosition()));
+	//}
 
 	private void setupPieces() {
 		squares[7][0].addPiece(new ChessPiece(Piece.ROOK,true,new Position( 7, 0), new ImageIcon(

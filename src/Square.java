@@ -70,7 +70,7 @@ public class Square extends JLabel implements MouseListener {
 		System.out.println("Mouse Click: x:" + position.getX() + " y:"
 				+ position.getY());
 		if(piece != null) System.out.println(piece.printValidPositions());
-		board.checkMoveable(this);
+		board.checkMoveable(this, this.getPiece());
 
 	}
 
