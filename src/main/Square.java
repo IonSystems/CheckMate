@@ -1,10 +1,14 @@
+package main;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import pieces.ChessPiece;
 
 /**
  * Square class for chess
@@ -73,7 +77,7 @@ public class Square extends JLabel implements MouseListener {
 		System.out.println("Mouse Click: x:" + position.getX() + " y:"
 				+ position.getY());
 		if(piece != null) System.out.println(piece.printValidPositions());
-		board.checkMoveable(this, this.getPiece());
+		board.board.checkMoveable(board, this, this.getPiece());
 
 	}
 
@@ -117,4 +121,17 @@ public class Square extends JLabel implements MouseListener {
 		
 
 	}
+	
+	public boolean isOccupied() {
+        /**
+         * If a square does not have an icon(icon == null) then there is no
+         * piece on the square.
+         */
+        //System.out.println("Checking occupation of square [" + p.getX() + "][" + p.getY() + "]");
+        try{
+        return piece != null;
+        }catch(NullPointerException e){
+                return false;
+        }
+}
 }
