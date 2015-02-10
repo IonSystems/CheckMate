@@ -14,14 +14,17 @@ import javax.swing.JPanel;
 
 public class ChessboardGUI extends JFrame implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JPanel main;
 	Square[][] squares;
 	ArrayList<ChessPiece> whiteTaken;
 	ArrayList<ChessPiece> blackTaken;
 	JMenuBar menuBar;
 	JMenu options, help, file;
-	JMenuItem save, load, exit, difficulty, sound, volume, helpPage,
-			onlineHelp;
+	JMenuItem save, load, exit, difficulty, sound, volume, helpPage,onlineHelp;
 	final int BOARDLENGTH = 8;
 	Square[] selected;
 	int difficultyLevel = 0;
@@ -226,46 +229,28 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	// }
 
 	private void setupPieces() {
-		squares[0][7].addPiece(new ChessPiece(Piece.ROOK, true, new Position(0,
-				7), new ImageIcon("res/RookW.png"), this));
-		squares[7][7].addPiece(new ChessPiece(Piece.ROOK, true, new Position(7,
-				7), new ImageIcon("res/RookW.png"), this));
-		squares[7][0].addPiece(new ChessPiece(Piece.ROOK, false, new Position(
-				7, 0), new ImageIcon("res/RookB.png"), this));
-		squares[0][0].addPiece(new ChessPiece(Piece.ROOK, false, new Position(
-				0, 0), new ImageIcon("res/RookB.png"), this));
+		squares[0][7].addPiece(new ChessPiece(Piece.ROOK, true, new Position(0,	7), new ImageIcon("res/RookW.png"), this));
+		squares[7][7].addPiece(new ChessPiece(Piece.ROOK, true, new Position(7, 7), new ImageIcon("res/RookW.png"), this));
+		squares[7][0].addPiece(new ChessPiece(Piece.ROOK, false, new Position(7, 0), new ImageIcon("res/RookB.png"), this));
+		squares[0][0].addPiece(new ChessPiece(Piece.ROOK, false, new Position(0, 0), new ImageIcon("res/RookB.png"), this));
 
-		squares[1][7].addPiece(new ChessPiece(Piece.KNIGHT, true, new Position(
-				1, 7), new ImageIcon("res/KnightW.png"), this));
-		squares[6][7].addPiece(new ChessPiece(Piece.KNIGHT, true, new Position(
-				6, 7), new ImageIcon("res/KnightW.png"), this));
-		squares[6][0].addPiece(new ChessPiece(Piece.KNIGHT, false,
-				new Position(6, 0), new ImageIcon("res/KnightB.png"), this));
-		squares[1][0].addPiece(new ChessPiece(Piece.KNIGHT, false,
-				new Position(1, 0), new ImageIcon("res/KnightB.png"), this));
+		squares[1][7].addPiece(new ChessPiece(Piece.KNIGHT, true, new Position(1, 7), new ImageIcon("res/KnightW.png"), this));
+		squares[6][7].addPiece(new ChessPiece(Piece.KNIGHT, true, new Position(6, 7), new ImageIcon("res/KnightW.png"), this));
+		squares[6][0].addPiece(new ChessPiece(Piece.KNIGHT, false,	new Position(6, 0), new ImageIcon("res/KnightB.png"), this));
+		squares[1][0].addPiece(new ChessPiece(Piece.KNIGHT, false,	new Position(1, 0), new ImageIcon("res/KnightB.png"), this));
 
-		squares[2][7].addPiece(new ChessPiece(Piece.BISHOP, true, new Position(
-				2, 7), new ImageIcon("res/BishopW.png"), this));
-		squares[5][7].addPiece(new ChessPiece(Piece.BISHOP, true, new Position(
-				5, 7), new ImageIcon("res/BishopW.png"), this));
-		squares[5][0].addPiece(new ChessPiece(Piece.BISHOP, false,
-				new Position(5, 0), new ImageIcon("res/BishopB.png"), this));
-		squares[2][0].addPiece(new ChessPiece(Piece.BISHOP, false,
-				new Position(2, 0), new ImageIcon("res/BishopB.png"), this));
+		squares[2][7].addPiece(new ChessPiece(Piece.BISHOP, true, new Position(	2, 7), new ImageIcon("res/BishopW.png"), this));
+		squares[5][7].addPiece(new ChessPiece(Piece.BISHOP, true, new Position(		5, 7), new ImageIcon("res/BishopW.png"), this));
+		squares[5][0].addPiece(new ChessPiece(Piece.BISHOP, false,	new Position(5, 0), new ImageIcon("res/BishopB.png"), this));
+		squares[2][0].addPiece(new ChessPiece(Piece.BISHOP, false,	new Position(2, 0), new ImageIcon("res/BishopB.png"), this));
 
-		squares[3][7].addPiece(new ChessPiece(Piece.KING, true, new Position(3,
-				7), new ImageIcon("res/KingW.png"), this));
-		squares[4][7].addPiece(new ChessPiece(Piece.QUEEN, true, new Position(
-				4, 7), new ImageIcon("res/QueenW.png"), this));
-		squares[3][0].addPiece(new ChessPiece(Piece.KING, false, new Position(
-				3, 0), new ImageIcon("res/KingB.png"), this));
-		squares[4][0].addPiece(new ChessPiece(Piece.QUEEN, false, new Position(
-				4, 0), new ImageIcon("res/QueenB.png"), this));
+		squares[3][7].addPiece(new ChessPiece(Piece.KING, true, new Position(3,7), new ImageIcon("res/KingW.png"), this));
+		squares[4][7].addPiece(new ChessPiece(Piece.QUEEN, true, new Position(4, 7), new ImageIcon("res/QueenW.png"), this));
+		squares[3][0].addPiece(new ChessPiece(Piece.KING, false, new Position(	3, 0), new ImageIcon("res/KingB.png"), this));
+		squares[4][0].addPiece(new ChessPiece(Piece.QUEEN, false, new Position(4, 0), new ImageIcon("res/QueenB.png"), this));
 		for (int i = 0; i <= 7; i++) {
-			squares[i][6].addPiece(new ChessPiece(Piece.PAWN, true,
-					new Position(i, 6), new ImageIcon("res/PawnW.png"), this));
-			squares[i][1].addPiece(new ChessPiece(Piece.PAWN, false,
-					new Position(i, 1), new ImageIcon("res/PawnB.png"), this));
+			squares[i][6].addPiece(new ChessPiece(Piece.PAWN, true, new Position(i, 6), new ImageIcon("res/PawnW.png"), this));
+			squares[i][1].addPiece(new ChessPiece(Piece.PAWN, false, new Position(i, 1), new ImageIcon("res/PawnB.png"), this));
 		}
 
 	}

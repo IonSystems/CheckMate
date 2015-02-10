@@ -52,13 +52,8 @@ public class ChessPiece {
 		switch (type) {
 		case PAWN:
 			if (whitePiece) {
-				possibleMoves.add(new Move(0, -1, false, true)); // Can only
-																	// move to
-																	// empty
-																	// square
-				possibleMoves.add(new Move(1, -1, true, false)); // Can only
-																	// take in
-																	// this move
+				possibleMoves.add(new Move(0, -1, false, true));
+				possibleMoves.add(new Move(1, -1, true, false)); 
 				possibleMoves.add(new Move(-1, -1, true, false));
 
 				possibleMoves.add(firstMoveWhite);
@@ -66,7 +61,7 @@ public class ChessPiece {
 				possibleMoves.add(new Move(0, 1, false, true));
 				possibleMoves.add(new Move(1, 1, true, false));
 				possibleMoves.add(new Move(-1, 1, true, false));
-
+				
 				possibleMoves.add(firstMoveBlack);
 			}
 			break;
@@ -131,16 +126,14 @@ public class ChessPiece {
 			}
 			if (positionWithinBounds(possiblePosition)
 					&& noJumps(possiblePosition, m)) {
-				// if (!board.isOccupied(possiblePosition)
-				// && !validPositions.contains(possiblePosition)) {
 				if ((m.isNormalMove() && !board.getSquare(possiblePosition)
 						.hasPiece())
 						|| (m.isTakeMove() && board.getSquare(possiblePosition)
 								.hasPiece()))
 					validPositions.add(possiblePosition);
-				// }
 			}
-			if(type == Piece.PAWN ){if (isEnPassant()) {
+			/*if(type == Piece.PAWN )*/
+			if (isEnPassant()) {
 				System.out.println("En passant active!");
 				if (whitePiece && left) {
 					validPositions.add(new Position(position.getX() - 1,
@@ -155,7 +148,6 @@ public class ChessPiece {
 					validPositions.add(new Position(position.getX() + 1,
 							position.getY() + 1));
 				}
-			}
 			}
 		}
 	}
@@ -297,12 +289,12 @@ public class ChessPiece {
 		return null;
 	}
 
-	private Position addSquareToSquareArray(ArrayList<Square> squares, int x,
+/*	private Position addSquareToSquareArray(ArrayList<Square> squares, int x,
 			int y) {
 		Position t = new Position(position.getX() + x, position.getY() + y);
 		squares.add(board.getSquare(t));
 		return t;
-	}
+	}*/
 
 	private boolean positionWithinBounds(Position possiblePosition) {
 		return possiblePosition.getX() < 8 && possiblePosition.getX() >= 0
