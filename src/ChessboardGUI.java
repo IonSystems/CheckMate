@@ -28,6 +28,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	int difficultyLevel = 0;
 	int volumeLevel = 50;
 	boolean soundOn = true;
+	int totalMoves;
 
 	public ChessboardGUI() {
 		whiteTaken = new ArrayList<ChessPiece>();
@@ -69,6 +70,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		menuBar.add(options);
 		menuBar.add(help);
 		menuBar.setVisible(true);
+		totalMoves = 0;
 		this.add(main);
 		setJMenuBar(menuBar);
 		this.setResizable(true);
@@ -171,6 +173,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 			to.addPiece(from.getPiece());//Move the piece to the new empty square.
 			to.getPiece().setPosition(to.getPosition());//Update position of piece to the position of the new square
 			to.getPiece().removeFirstMove();
+			to.getPiece().incrementMoves();
 			to.getPiece().findValidPositions();
 			from.addPiece(null);
 			return true;
@@ -331,6 +334,9 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 
 	public Square getSquare(Position position) {
 		return squares[position.getX()][position.getY()];
+	}
+	public void incrementTotalMoves(){
+		totalMoves++;
 	}
 
 }

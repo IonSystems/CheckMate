@@ -40,6 +40,7 @@ public class ChessPiece {
 		setupMoves();
 		findValidPositions();
 		playable = true;
+		moveCounter = 0;
 		
 		
 
@@ -286,6 +287,12 @@ public class ChessPiece {
 	public void removeFirstMove() {
 		possibleMoves.remove(firstMoveBlack);
 		possibleMoves.remove(firstMoveWhite);
+	}
+
+	public void incrementMoves() {
+		moveCounter++;
+		board.incrementTotalMoves();
+		
 	}
 
 }
