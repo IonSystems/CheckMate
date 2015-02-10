@@ -170,6 +170,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		 */if (valid) {// Possible move
 			to.addPiece(from.getPiece());//Move the piece to the new empty square.
 			to.getPiece().setPosition(to.getPosition());//Update position of piece to the position of the new square
+			to.getPiece().removeFirstMove();
 			to.getPiece().findValidPositions();
 			from.addPiece(null);
 			return true;

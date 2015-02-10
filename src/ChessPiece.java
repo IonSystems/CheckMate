@@ -15,6 +15,8 @@ public class ChessPiece {
 	ArrayList<Position> validPositions;
 	int points;
 	boolean playable; //True if still in the game, false if taken.
+	Move firstMoveWhite,firstMoveBlack;
+	int moveCounter;
 
 	// public ChessPiece(){};
 
@@ -33,9 +35,13 @@ public class ChessPiece {
 		this.board = board;
 		possibleMoves = new ArrayList<Move>();
 		validPositions = new ArrayList<Position>();
+		firstMoveWhite = new Move(-2,0,true);
+		firstMoveBlack = new Move(2,0,true);
 		setupMoves();
 		findValidPositions();
 		playable = true;
+		
+		
 
 	}
 
@@ -46,10 +52,14 @@ public class ChessPiece {
 				possibleMoves.add(new Move(-1, 0,false,true)); //Can only move to empty square
 				possibleMoves.add(new Move(-1, 1,true,false)); //Can only take in this move
 				possibleMoves.add(new Move(-1, -1,true,false));
+				
+				possibleMoves.add(firstMoveWhite);
 			} else {
 				possibleMoves.add(new Move(1, 0,false,true));
 				possibleMoves.add(new Move(1, 1,true,false));
 				possibleMoves.add(new Move(1, -1,true,false));
+				
+				possibleMoves.add(firstMoveBlack);
 			}
 			break;
 		case KNIGHT:
@@ -106,7 +116,10 @@ public class ChessPiece {
 	public void findValidPositions() {
 		validPositions.clear();
 		for (Move m : possibleMoves) {
-			Position possiblePosition = new Position(position.getX() + m.getX(), position.getY() + m.getY());
+			Position possiblePosition = new Position(position.getX()
+					+ m.getX(),
+					position.getY() +
+					m.getY());
 			if (positionWithinBounds(possiblePosition) && noJumps(possiblePosition,m)){
 				//if (!board.isOccupied(possiblePosition) 
 					//	&& !validPositions.contains(possiblePosition)) {
@@ -268,6 +281,11 @@ public class ChessPiece {
 			}
 		}
 		return null;
+	}
+
+	public void removeFirstMove() {
+		possibleMoves.remove(firstMoveBlack);
+		possibleMoves.remove(firstMoveWhite);
 	}
 
 }

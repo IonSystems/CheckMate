@@ -13,18 +13,28 @@ class Move {
 	private int y;
 	private boolean takeMove;	//Moving a piece to an occupied square.
 	private boolean normalMove; //A move to an empty square.
+	private boolean firstMoveOnly; //If this is true the move is only valid on the first move of the piece.
 
 	public Move(int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.takeMove = true;
 		this.normalMove = true;
+		this.firstMoveOnly = false;
+	}
+	public Move(int x, int y,boolean firstMoveOnly) {
+		this.x = x;
+		this.y = y;
+		this.takeMove = true;
+		this.normalMove = true;
+		this.firstMoveOnly = firstMoveOnly;
 	}
 	public Move(int x, int y,boolean takeMove, boolean normalMove) {
 		this.x = x;
 		this.y = y;
 		this.takeMove = takeMove;
 		this.normalMove = normalMove;
+		this.firstMoveOnly = false;
 	}
 
 	public int getX() {
@@ -51,5 +61,8 @@ class Move {
 	public boolean isTakeMove() {
 		return takeMove;
 		
+	}
+	public boolean isFirstMove(){
+		return firstMoveOnly;
 	}
 }

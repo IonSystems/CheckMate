@@ -107,7 +107,7 @@ public class Square extends JLabel implements MouseListener {
 		try{
 		if(piece == null) return false;
 		else return true;
-		}catch(NullPointerException e){
+		}catch(Exception e){
 			System.err.println("NULL POINTER!");
 			return false;
 		}
