@@ -43,8 +43,6 @@ public class Square extends JLabel implements MouseListener {
 
 	}
 
-
-	
 	public String createSquareName(int row, int column) {
 		if (row != 8) {
 			String name = "" + columns[column + 1] + (BOARDLENGTH - row - 1);
@@ -72,7 +70,8 @@ public class Square extends JLabel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("Mouse Click: x:" + position.getX() + " y:"
 				+ position.getY());
-		if(piece != null) System.out.println(piece.printValidPositions());
+		if (piece != null)
+			System.out.println(piece.printValidPositions());
 		board.checkMoveable(this, this.getPiece());
 
 	}
@@ -94,7 +93,8 @@ public class Square extends JLabel implements MouseListener {
 	}
 
 	public ChessPiece getPiece() {
-		if(piece == null) return null;
+		if (piece == null)
+			return null;
 		return piece;
 	}
 
@@ -102,19 +102,35 @@ public class Square extends JLabel implements MouseListener {
 		return new Position(position.getX(), position.getY());
 	}
 
-	public String toString(){
+	public String toString() {
 		return "" + position.getX() + position.getY();
 	}
 
 	public boolean hasPiece() {
-		try{
-		if(piece == null) return false;
-		else return true;
-		}catch(Exception e){
+		try {
+			if (piece == null)
+				return false;
+			else
+				return true;
+		} catch (Exception e) {
 			System.err.println("NULL POINTER!");
 			return false;
 		}
-		
 
 	}
+
+	public boolean hasImmediatePawn() {
+		try{
+			if (piece == null){
+				return false;
+			}
+			else if (piece.getType() == Piece.PAWN && piece.getMoveCounter() == 1 && this == board.getLastMove()){
+				return true;
+				}			
+		}catch(NullPointerException e){
+			return false;
+		}
+		return selected;
+	}
+
 }
