@@ -45,4 +45,11 @@ class Move {
 	public String toString(){
 		return "Move x:" + x + " Move y:" + y ;
 	}
+	public boolean isNormalMove() {
+		return normalMove;
+	}
+	public boolean isTakeMove() {
+		return takeMove;
+		
+	}
 }

@@ -102,4 +102,16 @@ public class Square extends JLabel implements MouseListener {
 	public String toString(){
 		return "" + position.getX() + position.getY();
 	}
+
+	public boolean hasPiece() {
+		try{
+		if(piece == null) return false;
+		else return true;
+		}catch(NullPointerException e){
+			System.err.println("NULL POINTER!");
+			return false;
+		}
+		
+
+	}
 }

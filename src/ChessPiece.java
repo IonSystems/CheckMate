@@ -110,6 +110,7 @@ public class ChessPiece {
 			if (positionWithinBounds(possiblePosition) && noJumps(possiblePosition,m)){
 				//if (!board.isOccupied(possiblePosition) 
 					//	&& !validPositions.contains(possiblePosition)) {
+				if((m.isNormalMove() && !board.getSquare(possiblePosition).hasPiece()) || (m.isTakeMove() && board.getSquare(possiblePosition).hasPiece()) )
 					validPositions.add(possiblePosition);
 				//}
 			}
