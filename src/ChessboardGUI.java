@@ -156,10 +156,14 @@ public class ChessboardGUI extends JFrame implements ActionListener {
                         return false;
                 if (from.getPiece().getType() == null)
                         return false;
+                if(move == null)
+                	return false;
                 //if(!move.isNormalMove())
                 //      return false;
                
-                if (to.hasPiece() && from.hasPiece() && move.isTakeMove()) { //if there is a piece where we want to go.
+                if (to.hasPiece() &&
+                		from.hasPiece() &&
+                		move.isTakeMove()) { //if there is a piece where we want to go.
                         valid = false;
                         return takePiece(from, to, move);
                         //Dead

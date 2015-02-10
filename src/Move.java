@@ -15,7 +15,7 @@ class Move {
 	private boolean normalMove; //A move to an empty square.
 	private boolean firstMoveOnly; //If this is true the move is only valid on the first move of the piece.
 
-	public Move(int x, int y) {
+	public Move(int x, int y) {	//For normal moves that are are both take moves and non-take moves, and do not apply just on first move.
 		this.x = x;
 		this.y = y;
 		this.takeMove = true;
