@@ -1,3 +1,11 @@
+	/**
+	 * @author Cameron Craig and Andrew Rigg
+	 * GUI for showing the layout of the chessboard to 
+	 * go with the physical board we are creating.  This application is 
+	 * to utilise AI and should be used to play against people at a distance 
+	 * or for saving games.
+	 */
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -10,13 +18,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-//GUI for showing the chess AI
-
 public class ChessboardGUI extends JFrame implements ActionListener {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	JPanel main;
 	Square[][] squares;
@@ -25,19 +29,19 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	JMenuBar menuBar;
 	JMenu options, help, file;
 	JMenuItem save, load, exit, difficulty, sound, volume, helpPage,onlineHelp;
-	final int BOARDLENGTH = 8;
+	final int BOARDLENGTH = 10;
 	Square[] selected;
 	int difficultyLevel = 0;
 	int volumeLevel = 50;
 	boolean soundOn = true;
-	int totalMoves;
+	int totalMoves = 0;
 	Square lastMove;
 
 	public ChessboardGUI() {
 		whiteTaken = new ArrayList<ChessPiece>();
 		blackTaken = new ArrayList<ChessPiece>();
-		main = new JPanel(new GridLayout(8, 8));
-		squares = new Square[9][9];
+		main = new JPanel(new GridLayout(10, 10));
+		squares = new Square[8][8];
 		selected = new Square[2];
 		setUp();
 		setupPieces();
@@ -78,13 +82,13 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		lastMove = null;
 		setJMenuBar(menuBar);
 		this.setResizable(true);
-		this.setSize(1000, 1000);
-		this.add(main);
+		this.setSize(800, 800);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 	}
 
+	//Background colour before we select a piece 
+	//for use when highlighting a square.
 	Color firstSelected = null;
 
 	protected int checkMoveable(Square square, ChessPiece chessPiece) {
@@ -262,7 +266,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 
 		if (e.getSource() == difficulty) {
 			difficultyLevel = ((difficultyLevel + 1) % 5);
-			// System.out.println("Difficulty is: " + (difficultyLevel + 1));
+			System.out.println("Difficulty is: " + (difficultyLevel + 1));
 		}
 		if (e.getSource() == onlineHelp) {
 			try {
@@ -289,19 +293,24 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
+		@SuppressWarnings("unused")
 		ChessboardGUI chess = new ChessboardGUI();
 	}
 
 	private void setUp() {
 		for (int i = 0; i < BOARDLENGTH; i++) {
 			for (int j = 0; j < BOARDLENGTH; j++) {
+
 				Position temp = new Position(j, i);
-				if ((i + j) % 2 == 0) {
-					squares[j][i] = new Square(this, null, temp, Color.WHITE);
-					main.add(squares[j][i]);
+				if (i == 0 || i == 9|| j == 0 || j == 9){
+					main.add(new Square(this, null, temp, Color.GRAY));
+				}
+				else if ((i + j) % 2 == 0) {
+					squares[j-1][i-1] = new Square(this, null, temp, Color.WHITE);
+					main.add(squares[j-1][i-1]);
 				} else {
-					squares[j][i] = new Square(this, null, temp, Color.BLACK);
-					main.add(squares[j][i]);
+					squares[j-1][i-1] = new Square(this, null, temp, Color.BLACK);
+					main.add(squares[j-1][i-1]);
 				}
 			}
 		}
@@ -312,8 +321,6 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		 * If a square does not have an icon(icon == null) then there is no
 		 * piece on the square.
 		 */
-		// System.out.println("Checking occupation of square [" + p.getX() +
-		// "][" + p.getY() + "]");
 		try {
 			return squares[p.getX()][p.getY()].getPiece() != null;
 		} catch (NullPointerException e) {

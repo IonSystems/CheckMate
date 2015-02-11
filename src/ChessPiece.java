@@ -1,6 +1,4 @@
-import java.awt.Color;
 import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
 
 /**
@@ -21,16 +19,8 @@ public class ChessPiece {
 	int moveCounter;
 	private boolean left;
 
-	// public ChessPiece(){};
-
-	/*
-	 * public ChessPiece(int initX, int initY, ImageIcon image,ChessboardGUI
-	 * board){ this.type = null; this.image = image; this.x = initX; this.y =
-	 * initY; }
-	 */
-
 	public ChessPiece(Piece type, boolean whitePiece, Position position,
-			ImageIcon image, ChessboardGUI board) {
+		ImageIcon image, ChessboardGUI board) {
 		moveCounter = 0;
 		this.type = type;
 		this.image = image;
@@ -45,7 +35,6 @@ public class ChessPiece {
 		findValidPositions();
 		playable = true;
 		left = false;
-
 	}
 
 	private void setupMoves() {
@@ -53,15 +42,13 @@ public class ChessPiece {
 		case PAWN:
 			if (whitePiece) {
 				possibleMoves.add(new Move(0, -1, false, true));
-				possibleMoves.add(new Move(1, -1, true, false)); 
+				possibleMoves.add(new Move(1, -1, true, false));
 				possibleMoves.add(new Move(-1, -1, true, false));
-
 				possibleMoves.add(firstMoveWhite);
 			} else {
 				possibleMoves.add(new Move(0, 1, false, true));
 				possibleMoves.add(new Move(1, 1, true, false));
 				possibleMoves.add(new Move(-1, 1, true, false));
-				
 				possibleMoves.add(firstMoveBlack);
 			}
 			break;
@@ -188,9 +175,6 @@ public class ChessPiece {
 
 
 	private boolean noJumps(Position possiblePosition, Move possibleMove) {
-		Position startPosition = position;
-		Position endPosition = possiblePosition;
-		//System.out.println("Move: " + possibleMove);
 		ArrayList<Square> squaresToCheck = new ArrayList<Square>();
 		squaresToCheck = getSquaresOnMove(possibleMove);
 		try {
@@ -266,7 +250,7 @@ public class ChessPiece {
 				}
 			}
 			if (!squares.isEmpty())
-				System.out.println("Bishop move inbetweeners." + squares);
+			//	System.out.println("Bishop move inbetweeners." + squares);
 			break;
 		case KNIGHT:
 

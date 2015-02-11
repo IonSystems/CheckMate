@@ -17,10 +17,10 @@ public class Square extends JLabel implements MouseListener {
 	Position position;
 	ChessPiece piece;
 	String squareName;
-	char[] columns = { ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
+	char[] columns = { ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', ' '};
 	String cols = "ABCDEFG";
 	boolean selected = true;
-	int BOARDLENGTH = 9;
+	int BOARDLENGTH = 10;
 	ChessboardGUI board;
 
 	public Square(ChessboardGUI board, ChessPiece piece, Position position,
@@ -45,8 +45,8 @@ public class Square extends JLabel implements MouseListener {
 	}
 
 	public String createSquareName(int column, int row) {
-		if (row != 8) {
-			String name = "" + columns[column + 1] + (BOARDLENGTH - row - 1);
+		if (row != 9 && column != 9 && row != 0 && column != 0) {
+			String name = "" + columns[column-1] + (BOARDLENGTH - row - 2);
 			return name;
 		} else {
 			String name = "" + columns[column];
@@ -69,10 +69,10 @@ public class Square extends JLabel implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("Mouse Click: x:" + position.getX() + " y:"
+		/*System.out.println("Mouse Click: x:" + position.getX() + " y:"
 				+ position.getY());
 		if (piece != null)
-			System.out.println(piece.printValidPositions());
+			System.out.println(piece.printValidPositions());*/
 		board.checkMoveable(this, this.getPiece());
 
 	}
