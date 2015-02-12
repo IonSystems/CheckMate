@@ -25,9 +25,9 @@ public class Square extends JLabel implements MouseListener {
 	String cols = "ABCDEFG";
 	boolean selected = true;
 	int BOARDLENGTH = 9;
-	ChessboardGUI board;
+	Board board;
 
-	public Square(ChessboardGUI board, ChessPiece piece, Position position,
+	public Square(Board board, ChessPiece piece, Position position,
 			Color colour) {
 		super("", SwingConstants.CENTER);
 		this.piece = piece;
@@ -77,7 +77,7 @@ public class Square extends JLabel implements MouseListener {
 		System.out.println("Mouse Click: x:" + position.getX() + " y:"
 				+ position.getY());
 		if(piece != null) System.out.println(piece.printValidPositions());
-		board.board.checkMoveable(board, this, this.getPiece());
+		board.checkMoveable(board, this, this.getPiece());
 
 	}
 

@@ -38,11 +38,11 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	public JMenuItem volume;
 	public JMenuItem helpPage;
 	public JMenuItem onlineHelp;
-	//private SidePanel sidepanel1;
+	private SidePanel sidepanel1;
 
 	public ChessboardGUI() {
 		board = new Board();
-		//sidepanel1 = new SidePanel();
+		sidepanel1 = new SidePanel(board);
 		setUp();
 		setupPieces();
 		menuBar = new JMenuBar();
@@ -88,15 +88,11 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	}
 
 	void resetSquareColors() {
-
 		for (int i = 0; i < board.BOARDLENGTH; i++) {
-
 			for (int j = 0; j < board.BOARDLENGTH; j++) {
-
 				if (i != 8) {
 					if ((i + j) % 2 == 0) {
 						board.squares[i][j].setBackground(Color.WHITE);
-
 					} else {
 						board.squares[i][j].setBackground(Color.BLACK);
 					}
@@ -204,11 +200,11 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 			for (int j = 0; j < board.BOARDLENGTH; j++) {
 				Position temp = new Position(i, j);
 				if ((i + j) % 2 == 0) {
-					board.squares[i][j] = new Square(this, null, temp,
+					board.squares[i][j] = new Square(board, null, temp,
 							Color.WHITE);
 					board.main.add(board.squares[i][j]);
 				} else {
-					board.squares[i][j] = new Square(this, null, temp,
+					board.squares[i][j] = new Square(board, null, temp,
 							Color.BLACK);
 					board.main.add(board.squares[i][j]);
 				}
