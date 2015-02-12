@@ -124,7 +124,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 				movePiece(selected[0], selected[1], selected[0].getPiece()
 						.getMove(selected[1].getPosition()));
 				selected[0].setBackground(firstSelected);
-				resetSquareColors();
+				setUp();
 				selected[0] = null;
 				selected[1] = null;
 				return 1;
@@ -135,22 +135,19 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 
 	private void resetSquareColors() {
 
-		for (int i = 0; i < BOARDLENGTH; i++) {
-
-			for (int j = 0; j < BOARDLENGTH; j++) {
-
-				if (i != 8) {
-					if ((i + j) % 2 == 0) {
-						squares[i][j].setBackground(Color.WHITE);
-
-					} else {
-						squares[i][j].setBackground(Color.BLACK);
+		for (int i = 1; i < BOARDLENGTH-1; i++) {
+			for (int j = 1; j < BOARDLENGTH-1; j++) {
+				Position temp = new Position(j, i);
+				if ((i + j) % 2 == 0) {
+					squares[j-1][i-1] = new Square(this, null, temp, Color.WHITE);
+					main.add(squares[j-1][i-1]);
+				} else {
+					squares[j-1][i-1] = new Square(this, null, temp, Color.BLACK);
+					main.add(squares[j-1][i-1]);
 					}
 				}
 			}
-
 		}
-	}
 
 	private void highlightValidPositions(ChessPiece piece) {
 		for (Position p : piece.getValidPositions()) {
@@ -300,7 +297,6 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	private void setUp() {
 		for (int i = 0; i < BOARDLENGTH; i++) {
 			for (int j = 0; j < BOARDLENGTH; j++) {
-
 				Position temp = new Position(j, i);
 				if (i == 0 || i == 9|| j == 0 || j == 9){
 					main.add(new Square(this, null, temp, Color.GRAY));
