@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
@@ -29,6 +30,8 @@ public class Board {
 		whiteTaken = new ArrayList<ChessPiece>();
         blackTaken = new ArrayList<ChessPiece>();
         main = new JPanel(new GridLayout(8, 8));
+        main.setSize(1000,1000);
+        main.setMaximumSize(new Dimension(1000,1000));
         squares = new Square[9][9];
         selected = new Square[2];
         
@@ -39,7 +42,7 @@ public class Board {
         totalMoves = 0;
 	}
 
-	protected int checkMoveable(Board board, Square square, ChessPiece chessPiece) {
+	protected int checkMoveable(Square square, ChessPiece chessPiece) {
 	        /*
 	         * square is the square that has been clicked.
 	         * selected[0] is the starting position of the piece.
@@ -50,7 +53,7 @@ public class Board {
 	                if (square.getIcon() != null && square.getPiece().isPlayable()) {
 	                        firstSelected = square.getBackground();
 	                        square.setBackground(Color.BLUE);
-	                        board.highlightValidPositions(square.getPiece());
+	                        highlightValidPositions(square.getPiece());
 	                        selected[0] = square;
 	                        return 0;
 	                }

@@ -35,7 +35,9 @@ public class Square extends JLabel implements MouseListener {
 		this.position = position;
 		this.setBackground(colour);
 		this.setOpaque(true);
-		this.setSize(new Dimension(50, 50));
+		//this.setSize(new Dimension(50, 50));
+		//this.setMaximumSize(new Dimension(50, 50));
+		//this.setMaximumSize(new Dimension(50, 50));
 		this.setVisible(true);
 		if (this.piece != null) {
 			this.setIcon(piece.getIcon());
@@ -77,7 +79,7 @@ public class Square extends JLabel implements MouseListener {
 		System.out.println("Mouse Click: x:" + position.getX() + " y:"
 				+ position.getY());
 		if(piece != null) System.out.println(piece.printValidPositions());
-		board.checkMoveable(board, this, this.getPiece());
+		board.checkMoveable(this, this.getPiece());
 
 	}
 

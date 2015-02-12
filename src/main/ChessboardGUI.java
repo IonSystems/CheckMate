@@ -38,11 +38,13 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	public JMenuItem volume;
 	public JMenuItem helpPage;
 	public JMenuItem onlineHelp;
-	private SidePanel sidepanel1;
+	private SidePanel sidePanel1;
+	private SidePanel sidePanel2;
 
 	public ChessboardGUI() {
 		board = new Board();
-		sidepanel1 = new SidePanel(board);
+		sidePanel1 = new SidePanel(board);
+		sidePanel2 = new SidePanel(board);
 		setUp();
 		board.setupPieces();
 		menuBar = new JMenuBar();
@@ -78,10 +80,12 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		menuBar.add(help);
 		menuBar.setVisible(true);
 		this.setLayout(new BorderLayout());
-		this.add(board.main);
+		this.add(board.main,BorderLayout.CENTER);
+		this.add(sidePanel1,BorderLayout.EAST);
+		this.add(sidePanel2,BorderLayout.WEST);
 		setJMenuBar(menuBar);
 		this.setResizable(true);
-		this.setSize(1000, 1000);
+		this.setSize(1200, 1000);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
