@@ -1,22 +1,12 @@
 package main;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-
-import pieces.ChessPiece;
-import pieces.Pawn;
-import pieces.Piece;
 
 //GUI for showing the chess AI
 
@@ -42,9 +32,9 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	private SidePanel sidePanel2;
 
 	public ChessboardGUI() {
-		board = new Board();
 		sidePanel1 = new SidePanel(board);
 		sidePanel2 = new SidePanel(board);
+		board = new Board();
 		setUp();
 		board.setupPieces();
 		menuBar = new JMenuBar();
@@ -79,16 +69,15 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		menuBar.add(options);
 		menuBar.add(help);
 		menuBar.setVisible(true);
-		this.setLayout(new BorderLayout());
-		this.add(board.main,BorderLayout.CENTER);
-		this.add(sidePanel1,BorderLayout.EAST);
-		this.add(sidePanel2,BorderLayout.WEST);
+		setLayout(new GridBagLayout());
 		setJMenuBar(menuBar);
-		this.setResizable(true);
-		this.setSize(1200, 1000);
-		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		setResizable(false);
+		setSize(1500, 1000);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		add(sidePanel1);
+		add(board.main/*,BorderLayout.CENTER*/);
+		add(sidePanel2/*,BorderLayout.LINE_START*/);
+		setVisible(true);
 	}
 
 	

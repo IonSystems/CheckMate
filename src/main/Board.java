@@ -32,6 +32,7 @@ public class Board {
         main = new JPanel(new GridLayout(8, 8));
         main.setSize(1000,1000);
         main.setMaximumSize(new Dimension(1000,1000));
+        main.setMinimumSize(new Dimension(1000,1000));
         squares = new Square[9][9];
         selected = new Square[2];
         

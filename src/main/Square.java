@@ -35,9 +35,9 @@ public class Square extends JLabel implements MouseListener {
 		this.position = position;
 		this.setBackground(colour);
 		this.setOpaque(true);
-		//this.setSize(new Dimension(50, 50));
-		//this.setMaximumSize(new Dimension(50, 50));
-		//this.setMaximumSize(new Dimension(50, 50));
+		this.setSize(new Dimension(125, 125));
+		this.setMaximumSize(new Dimension(125, 125));
+		this.setMaximumSize(new Dimension(125, 125));
 		this.setVisible(true);
 		if (this.piece != null) {
 			this.setIcon(piece.getIcon());
