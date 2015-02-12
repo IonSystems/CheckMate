@@ -44,7 +44,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		board = new Board();
 		sidepanel1 = new SidePanel(board);
 		setUp();
-		setupPieces();
+		board.setupPieces();
 		menuBar = new JMenuBar();
 		options = new JMenu("Options");
 		help = new JMenu("Help");
@@ -87,77 +87,15 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 
 	}
 
-	void resetSquareColors() {
-		for (int i = 0; i < board.BOARDLENGTH; i++) {
-			for (int j = 0; j < board.BOARDLENGTH; j++) {
-				if (i != 8) {
-					if ((i + j) % 2 == 0) {
-						board.squares[i][j].setBackground(Color.WHITE);
-					} else {
-						board.squares[i][j].setBackground(Color.BLACK);
-					}
-				}
-			}
+	
 
-		}
-	}
-
-	void highlightValidPositions(ChessPiece piece) {
-		for (Position p : piece.getValidPositions()) {
-			board.squares[p.getX()][p.getY()].setBackground(Color.GREEN);
-		}
-
-	}
+	
 
 	// private boolean rulesAdheredTo(Square to, Square from) {
 	// return (to.getPiece().getValidPositions().contains(from.getPosition()));
 	// }
 
-	private void setupPieces() {
-		board.squares[7][0].addPiece(new ChessPiece(Piece.ROOK, true,
-				new Position(7, 0), new ImageIcon("res/RookW.png"), this));
-		board.squares[7][7].addPiece(new ChessPiece(Piece.ROOK, true,
-				new Position(7, 7), new ImageIcon("res/RookW.png"), this));
-		board.squares[0][7].addPiece(new ChessPiece(Piece.ROOK, false,
-				new Position(0, 7), new ImageIcon("res/RookB.png"), this));
-		board.squares[0][0].addPiece(new ChessPiece(Piece.ROOK, false,
-				new Position(0, 0), new ImageIcon("res/RookB.png"), this));
-
-		board.squares[7][1].addPiece(new ChessPiece(Piece.KNIGHT, true,
-				new Position(7, 1), new ImageIcon("res/KnightW.png"), this));
-		board.squares[7][6].addPiece(new ChessPiece(Piece.KNIGHT, true,
-				new Position(7, 6), new ImageIcon("res/KnightW.png"), this));
-		board.squares[0][6].addPiece(new ChessPiece(Piece.KNIGHT, false,
-				new Position(0, 6), new ImageIcon("res/KnightB.png"), this));
-		board.squares[0][1].addPiece(new ChessPiece(Piece.KNIGHT, false,
-				new Position(0, 1), new ImageIcon("res/KnightB.png"), this));
-
-		board.squares[7][2].addPiece(new ChessPiece(Piece.BISHOP, true,
-				new Position(7, 2), new ImageIcon("res/BishopW.png"), this));
-		board.squares[7][5].addPiece(new ChessPiece(Piece.BISHOP, true,
-				new Position(7, 5), new ImageIcon("res/BishopW.png"), this));
-		board.squares[0][5].addPiece(new ChessPiece(Piece.BISHOP, false,
-				new Position(0, 5), new ImageIcon("res/BishopB.png"), this));
-		board.squares[0][2].addPiece(new ChessPiece(Piece.BISHOP, false,
-				new Position(0, 2), new ImageIcon("res/BishopB.png"), this));
-
-		board.squares[7][3].addPiece(new ChessPiece(Piece.KING, true,
-				new Position(7, 3), new ImageIcon("res/KingW.png"), this));
-		board.squares[7][4].addPiece(new ChessPiece(Piece.QUEEN, true,
-				new Position(7, 4), new ImageIcon("res/QueenW.png"), this));
-		board.squares[0][3].addPiece(new ChessPiece(Piece.KING, false,
-				new Position(0, 3), new ImageIcon("res/KingB.png"), this));
-		board.squares[0][4].addPiece(new ChessPiece(Piece.QUEEN, false,
-				new Position(0, 4), new ImageIcon("res/QueenB.png"), this));
-		for (int i = 0; i <= 7; i++) {
-			board.squares[6][i].addPiece(new Pawn(Piece.PAWN, true,
-					new Position(6, i), new ImageIcon("res/PawnW.png"), this));
-			board.squares[1][i].addPiece(new Pawn(Piece.PAWN, false,
-					new Position(1, i), new ImageIcon("res/PawnB.png"), this));
-		}
-
-	}
-
+	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == exit) {
 			System.exit(0);
@@ -212,8 +150,6 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		}
 	}
 
-	public void incrementTotalMoves() {
-		board.totalMoves++;
-	}
+	
 
 }

@@ -4,12 +4,14 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import pieces.ChessPiece;
+import pieces.Pawn;
 import pieces.Piece;
 
 public class Board {
@@ -37,7 +39,7 @@ public class Board {
         totalMoves = 0;
 	}
 
-	protected int checkMoveable(ChessboardGUI chessboardGUI, Square square, ChessPiece chessPiece) {
+	protected int checkMoveable(Board board, Square square, ChessPiece chessPiece) {
 	        /*
 	         * square is the square that has been clicked.
 	         * selected[0] is the starting position of the piece.
@@ -48,7 +50,7 @@ public class Board {
 	                if (square.getIcon() != null && square.getPiece().isPlayable()) {
 	                        firstSelected = square.getBackground();
 	                        square.setBackground(Color.BLUE);
-	                        chessboardGUI.highlightValidPositions(square.getPiece());
+	                        board.highlightValidPositions(square.getPiece());
 	                        selected[0] = square;
 	                        return 0;
 	                }
@@ -58,7 +60,7 @@ public class Board {
 	         * full, the move is made and the selected pieces set back to null
 	         */
 	        else if (selected[0] != null && selected[1] != null) {
-	                chessboardGUI.board.movePiece(chessboardGUI, selected[0], selected[1],selected[0].getPiece().getMove(selected[1].getPosition()));
+	                movePiece(selected[0], selected[1],selected[0].getPiece().getMove(selected[1].getPosition()));
 	                selected[0] = null;
 	                selected[1] = null;
 	                return 1;
@@ -66,9 +68,9 @@ public class Board {
 	                if (true/* && rulesAdheredTo(selected[0], square) */) {
 	                        selected[1] = square;
 	                        //Move move = selected[0].
-	                        chessboardGUI.board.movePiece(chessboardGUI, selected[0], selected[1],selected[0].getPiece().getMove(selected[1].getPosition()));
+	                        movePiece( selected[0], selected[1],selected[0].getPiece().getMove(selected[1].getPosition()));
 	                        selected[0].setBackground(firstSelected);
-	                        chessboardGUI.resetSquareColors();
+	                        resetSquareColors();
 	                        selected[0] = null;
 	                        selected[1] = null;
 	                        return 1;
@@ -77,7 +79,7 @@ public class Board {
 	        return 1;
 	}
 
-	boolean movePiece(ChessboardGUI chessboardGUI, Square from, Square to, Move move) {
+	boolean movePiece(Square from, Square to, Move move) {
 	        //ChessPiece pieceBeingMoved = from.getPiece();
 	        boolean valid = true;
 	        if (from.getPiece() == null)
@@ -89,7 +91,7 @@ public class Board {
 	       
 	        if (to.hasPiece() && from.hasPiece() && move.isTakeMove()) { //if there is a piece where we want to go.
 	                valid = false;
-	                return chessboardGUI.board.takePiece(chessboardGUI, from, to, move);
+	                return takePiece(from, to, move);
 	                //Dead
 	 
 	        }if(to.getBackground() != Color.green) valid = false; //This seems a rather crude way of checking for a valid move.
@@ -110,7 +112,7 @@ public class Board {
 	        return false;
 	}
 
-	boolean takePiece(ChessboardGUI chessboardGUI, Square from, Square to, Move move) {
+	boolean takePiece(Square from, Square to, Move move) {
 	 
 	        boolean valid = true;
 	        //System.out.println("Taking:" + from.getPiece().getColour() + ", Taken:" + to.getPiece().getColour());
@@ -144,7 +146,80 @@ public class Board {
 	 
 	}
 
-	public Square getSquare(ChessboardGUI chessboardGUI, Position position) {
+	public Square getSquare(Position position) {
 	        return squares[position.getX()][position.getY()];
 	}
+	
+	public void highlightValidPositions(ChessPiece piece) {
+		for (Position p : piece.getValidPositions()) {
+			squares[p.getX()][p.getY()].setBackground(Color.GREEN);
+		}
+
+	}
+	public void resetSquareColors() {
+		for (int i = 0; i < BOARDLENGTH; i++) {
+			for (int j = 0; j < BOARDLENGTH; j++) {
+				if (i != 8) {
+					if ((i + j) % 2 == 0) {
+						squares[i][j].setBackground(Color.WHITE);
+					} else {
+						squares[i][j].setBackground(Color.BLACK);
+					}
+				}
+			}
+
+		}
+	}
+	
+	void setupPieces() {
+		squares[7][0].addPiece(new ChessPiece(Piece.ROOK, true,
+				new Position(7, 0), new ImageIcon("res/RookW.png"), this));
+		squares[7][7].addPiece(new ChessPiece(Piece.ROOK, true,
+				new Position(7, 7), new ImageIcon("res/RookW.png"), this));
+		squares[0][7].addPiece(new ChessPiece(Piece.ROOK, false,
+				new Position(0, 7), new ImageIcon("res/RookB.png"), this));
+		squares[0][0].addPiece(new ChessPiece(Piece.ROOK, false,
+				new Position(0, 0), new ImageIcon("res/RookB.png"), this));
+
+		squares[7][1].addPiece(new ChessPiece(Piece.KNIGHT, true,
+				new Position(7, 1), new ImageIcon("res/KnightW.png"), this));
+		squares[7][6].addPiece(new ChessPiece(Piece.KNIGHT, true,
+				new Position(7, 6), new ImageIcon("res/KnightW.png"), this));
+		squares[0][6].addPiece(new ChessPiece(Piece.KNIGHT, false,
+				new Position(0, 6), new ImageIcon("res/KnightB.png"), this));
+		squares[0][1].addPiece(new ChessPiece(Piece.KNIGHT, false,
+				new Position(0, 1), new ImageIcon("res/KnightB.png"), this));
+
+		squares[7][2].addPiece(new ChessPiece(Piece.BISHOP, true,
+				new Position(7, 2), new ImageIcon("res/BishopW.png"), this));
+		squares[7][5].addPiece(new ChessPiece(Piece.BISHOP, true,
+				new Position(7, 5), new ImageIcon("res/BishopW.png"), this));
+		squares[0][5].addPiece(new ChessPiece(Piece.BISHOP, false,
+				new Position(0, 5), new ImageIcon("res/BishopB.png"), this));
+		squares[0][2].addPiece(new ChessPiece(Piece.BISHOP, false,
+				new Position(0, 2), new ImageIcon("res/BishopB.png"), this));
+
+		squares[7][3].addPiece(new ChessPiece(Piece.KING, true,
+				new Position(7, 3), new ImageIcon("res/KingW.png"), this));
+		squares[7][4].addPiece(new ChessPiece(Piece.QUEEN, true,
+				new Position(7, 4), new ImageIcon("res/QueenW.png"), this));
+		squares[0][3].addPiece(new ChessPiece(Piece.KING, false,
+				new Position(0, 3), new ImageIcon("res/KingB.png"), this));
+		squares[0][4].addPiece(new ChessPiece(Piece.QUEEN, false,
+				new Position(0, 4), new ImageIcon("res/QueenB.png"), this));
+		for (int i = 0; i <= 7; i++) {
+			squares[6][i].addPiece(new Pawn(Piece.PAWN, true,
+					new Position(6, i), new ImageIcon("res/PawnW.png"), this));
+			squares[1][i].addPiece(new Pawn(Piece.PAWN, false,
+					new Position(1, i), new ImageIcon("res/PawnB.png"), this));
+		}
+		
+		
+
+	}
+	public void incrementTotalMoves() {
+		totalMoves++;
+	}
+	
+
 }

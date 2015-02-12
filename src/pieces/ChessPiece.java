@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import main.Board;
 import main.ChessboardGUI;
 import main.Move;
 import main.Position;
@@ -13,7 +14,7 @@ import main.Square;
  * Create a chess piece with it's various attributes
  */
 public class ChessPiece {
-	ChessboardGUI board;
+	Board board;
 	ImageIcon image;
 	Position position;
 	final int BOARD_DIMENSION = 8;
@@ -36,7 +37,7 @@ public class ChessPiece {
 	 */
 
 	public ChessPiece(Piece type, boolean whitePiece, Position position,
-			ImageIcon image, ChessboardGUI board) {
+			ImageIcon image, Board board) {
 		this.type = type;
 		this.image = image;
 		this.position = position;
@@ -137,9 +138,9 @@ public class ChessPiece {
 					&& noJumps(possiblePosition, m)) {
 				// if (!board.isOccupied(possiblePosition)
 				// && !validPositions.contains(possiblePosition)) {
-				if ((m.isNormalMove() && !board.board.getSquare(board,
+				if ((m.isNormalMove() && !board.getSquare(
 						possiblePosition).hasPiece())
-						|| (m.isTakeMove() && board.board.getSquare(board,
+						|| (m.isTakeMove() && board.getSquare(
 								possiblePosition).hasPiece()))
 					validPositions.add(possiblePosition);
 				// }
@@ -215,16 +216,16 @@ public class ChessPiece {
 				for (int i = 1; i < x; i++) {
 					Position positionOnMove = new Position(x + i, y + i);
 					if (positionOnMove.inBounds())
-						squares.add(board.board
-								.getSquare(board, positionOnMove));
+						squares.add(board
+								.getSquare(positionOnMove));
 				}
 			} else if (x < 0 && y < 0) { // The move is going diagonally up to
 											// the left.
 				for (int i = -1; i < x; i--) {
 					Position positionOnMove = new Position(x + i, y + i);
 					if (positionOnMove.inBounds())
-						squares.add(board.board
-								.getSquare(board, positionOnMove));
+						squares.add(board
+								.getSquare(positionOnMove));
 				}
 			}
 			if (!squares.isEmpty())

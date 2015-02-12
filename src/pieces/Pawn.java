@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import main.Board;
 import main.ChessboardGUI;
 import main.Move;
 import main.Position;
@@ -14,7 +15,7 @@ public class Pawn extends ChessPiece{
 	//firstMoveWhite 
 	//firstMoveBlack = 
 	public Pawn(Piece type, boolean whitePiece, Position position,
-			ImageIcon image, ChessboardGUI board){
+			ImageIcon image, Board board){
 		
 		super(type,whitePiece,position,image,board);
 	
