@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -37,10 +38,11 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	public JMenuItem volume;
 	public JMenuItem helpPage;
 	public JMenuItem onlineHelp;
+	//private SidePanel sidepanel1;
 
 	public ChessboardGUI() {
 		board = new Board();
-
+		//sidepanel1 = new SidePanel();
 		setUp();
 		setupPieces();
 		menuBar = new JMenuBar();
@@ -75,11 +77,11 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		menuBar.add(options);
 		menuBar.add(help);
 		menuBar.setVisible(true);
+		this.setLayout(new BorderLayout());
 		this.add(board.main);
 		setJMenuBar(menuBar);
 		this.setResizable(true);
 		this.setSize(1000, 1000);
-		this.add(board.main);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
