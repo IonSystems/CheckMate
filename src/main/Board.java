@@ -10,6 +10,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import pieces.ChessPiece;
+import pieces.Piece;
 
 public class Board {
 	public JPanel main;
@@ -99,7 +100,7 @@ public class Board {
 	         */if (valid) {// Possible move
 	                to.addPiece(from.getPiece());//Move the piece to the new empty square.
 	                to.getPiece().setPosition(to.getPosition());//Update position of piece to the position of the new square
-	                //to.getPiece().removeFirstMove();
+	                if ( to.getPiece().getType() == Piece.PAWN) to.getPiece().removeInitialMove();
 	                to.getPiece().incrementMoves();
 	                to.getPiece().findValidPositions();
 	                from.addPiece(null);

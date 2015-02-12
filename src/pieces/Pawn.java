@@ -21,6 +21,10 @@ public class Pawn extends ChessPiece{
 		
 	}
 	
+	public void removeInitialMove(){
+		possibleMoves.remove(firstMoveBlack);
+		possibleMoves.remove(firstMoveWhite);
+	}
 	
 
 	
@@ -35,14 +39,14 @@ public class Pawn extends ChessPiece{
 																	// take in
 																	// this move
 				possibleMoves.add(new Move(-1, -1, true, false));
-				//possibleMoves.add(firstMoveWhite);
+				possibleMoves.add(firstMoveWhite);
 				
 			} else {
 				possibleMoves.add(new Move(1, 0, false, true));
 				possibleMoves.add(new Move(1, 1, true, false));
 				possibleMoves.add(new Move(1, -1, true, false));
 				
-				//possibleMoves.add(firstMoveBlack);
+				possibleMoves.add(firstMoveBlack);
 			}
 			
 	}

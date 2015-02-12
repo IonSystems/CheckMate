@@ -328,5 +328,9 @@ public class ChessPiece {
 		board.incrementTotalMoves();
 
 	}
+	public void removeInitialMove(){
+		possibleMoves.remove(firstMoveBlack);
+		possibleMoves.remove(firstMoveWhite);
+	}
 
 }
