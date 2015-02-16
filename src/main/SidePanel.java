@@ -11,6 +11,7 @@ public class SidePanel extends JPanel{
 
 	public SidePanel(Board board){
 		new JPanel(new GridBagLayout());
+		setForeground(Color.ORANGE);
 		squares = new Square[2][8];
 		for(int i = 0; i < 2; i++){
 			for(int j = 0; j< 8; j++){
