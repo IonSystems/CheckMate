@@ -224,6 +224,11 @@ public class Board {
 	public void incrementTotalMoves() {
 		totalMoves++;
 	}
+
+	public void promote(Pawn pawn,Piece type) {
+		pawn.promote(type);
+		
+	}
 	
 
 }
