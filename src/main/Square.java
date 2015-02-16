@@ -74,7 +74,7 @@ public class Square extends JLabel implements MouseListener {
 
 	}
 
-	@Override
+	
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("Mouse Click: x:" + position.getX() + " y:"
 				+ position.getY());
