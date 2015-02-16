@@ -17,6 +17,7 @@ import pieces.Piece;
 
 public class Board {
 	public JPanel main;
+	Controller controller;
 	public Square[][] squares;
 	public ArrayList<ChessPiece> whiteTaken;
 	public ArrayList<ChessPiece> blackTaken;
