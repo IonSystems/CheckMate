@@ -8,7 +8,7 @@ import javax.swing.*;
 import pieces.Pawn;
 import pieces.Piece;
 
-public class PawnSelectPane implements ActionListener {
+public class PawnSelectPane extends JWindow implements ActionListener {
 	private Board board;
    private JFrame mainFrame;
    private Color colour;
@@ -30,7 +30,8 @@ public class PawnSelectPane implements ActionListener {
       prepareGUI();
    }
 
-   public static void main(String[] args){
+   
+public static void main(String[] args){
 	   Board board = new Board();
 	   //board.setupPieces();
 	  // board.movePiece(board.getSquare(new Position(6, 5)),board.getSquare(new Position(4,5)), new Move(-2,0));
@@ -83,11 +84,11 @@ public class PawnSelectPane implements ActionListener {
       mainFrame.add(bishop);
       mainFrame.setVisible(true);  
    }
-@Override
 public void actionPerformed(ActionEvent e) {
 	if(e.getSource() == rook){
 		System.out.println("Rook");
 		board.promote(pawn,Piece.ROOK);
+		System.exit(0);
 	}
 	
 }

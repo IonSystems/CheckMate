@@ -111,10 +111,22 @@ public class Board {
 	                to.getPiece().incrementMoves();
 	                to.getPiece().findValidPositions();
 	                from.addPiece(null);
-	                return true;
+	                 checkPromotion(to.getPiece());
 	        }
-	 
-	        return false;
+	        
+	         
+	        return true;
+	}
+
+	private void checkPromotion(ChessPiece piece) {
+		int end = piece.getColour() ? 0 : 7;
+		System.out.println("checking " + piece.getType() + " at " + piece.getPosition());
+		if(piece.getType() == Piece.PAWN && piece.getPosition().getX() == end){
+			System.out.println("PROMOTION");
+			PawnSelectPane pane = new PawnSelectPane(this,(Pawn)piece);
+			//promote(piece, type);
+		}
+		
 	}
 
 	boolean takePiece(Square from, Square to, Move move) {
@@ -142,11 +154,12 @@ public class Board {
 	                to.getPiece().setPosition(to.getPosition());//Update position of piece to the position of the new square
 	                to.getPiece().findValidPositions();
 	                from.addPiece(null);
-	               
+	                 checkPromotion(to.getPiece());
 	                //System.out.println("Piece Taken!");
 	        }
+	      
 	        //System.out.println("Piece to be taken!");
-	        return false;
+	        return true;
 	        // TODO Auto-generated method stub
 	 
 	}
@@ -227,7 +240,21 @@ public class Board {
 	}
 
 	public void promote(Pawn pawn,Piece type) {
-		pawn.promote(type);
+		ChessPiece newPiece;
+		switch(type){
+		case ROOK:
+			newPiece = new ChessPiece(type, pawn.getTrueColour(), null, null, this);
+			break;
+		case KING:
+			break;
+		case QUEEN:
+			break;
+		case KNIGHT:
+			break;
+		case BISHOP:
+			break;
+		
+		}
 		
 	}
 	

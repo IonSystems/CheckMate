@@ -1,8 +1,10 @@
 package pieces;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 
 import main.Board;
 import main.ChessboardGUI;
@@ -255,7 +257,7 @@ public class ChessPiece {
 	private Position addSquareToSquareArray(ArrayList<Square> squares, int x,
 			int y) {
 		Position t = new Position(position.getX() + x, position.getY() + y);
-		squares.add(board.board.getSquare(board, t));
+		squares.add(board.getSquare( t));
 		return t;
 	}
 
@@ -332,6 +334,14 @@ public class ChessPiece {
 	public void removeInitialMove(){
 		possibleMoves.remove(firstMoveBlack);
 		possibleMoves.remove(firstMoveWhite);
+	}
+
+	public Position getPosition() {
+		return position;
+	}
+	public Color getTrueColour(){
+		if (whitePiece) return Color.white;
+		else return Color.black;
 	}
 
 }

@@ -63,14 +63,6 @@ public class Pawn extends ChessPiece{
 		possibleMoves.remove(firstMoveWhite);
 	}
 
-	public void promote(Piece type) {
-		switch(type){
-		case ROOK:
-			this = new ChessPiece();
-			break;
-		}
-		
-		
-	}
+
 	
 }
