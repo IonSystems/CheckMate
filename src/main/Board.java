@@ -239,11 +239,12 @@ public class Board {
 		totalMoves++;
 	}
 
-	public void promote(Pawn pawn,Piece type) {
+	public void promote(ChessPiece pawn, Piece type) {
 		ChessPiece newPiece;
 		switch(type){
 		case ROOK:
-			newPiece = new ChessPiece(type, pawn.getTrueColour(), null, null, this);
+			newPiece = new ChessPiece(type, pawn.getColour(), pawn.getPosition(), new ImageIcon("res/RookB.png"), this);
+			pawn =  newPiece;
 			break;
 		case KING:
 			break;

@@ -9,6 +9,10 @@ import pieces.Pawn;
 import pieces.Piece;
 
 public class PawnSelectPane extends JWindow implements ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Board board;
    private JFrame mainFrame;
    private Color colour;
@@ -86,9 +90,10 @@ public static void main(String[] args){
    }
 public void actionPerformed(ActionEvent e) {
 	if(e.getSource() == rook){
+		dispose();
 		System.out.println("Rook");
-		board.promote(pawn,Piece.ROOK);
-		System.exit(0);
+		board.promote(pawn, Piece.ROOK);
+		//System.exit(0);
 	}
 	
 }
