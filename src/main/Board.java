@@ -27,7 +27,8 @@ public class Board {
 	public int totalMoves;
 	public Color firstSelected;
 
-	public Board() {
+	public Board(Controller controller) {
+		this.controller = controller;
 		whiteTaken = new ArrayList<ChessPiece>();
         blackTaken = new ArrayList<ChessPiece>();
         main = new JPanel(new GridLayout(8, 8));
@@ -50,9 +51,9 @@ public class Board {
 	         * selected[0] is the starting position of the piece.
 	         * selected[1] is the finishing position of the piece.
 	         */
-	 
+			
 	        if (selected[0] == null && selected[1] == null) {
-	                if (square.getIcon() != null && square.getPiece().isPlayable()) {
+	                if (square.getIcon() != null && square.getPiece().isPlayable() && controller.isTurn(square.getPiece().getTrueColour())) {
 	                        firstSelected = square.getBackground();
 	                        square.setBackground(Color.BLUE);
 	                        highlightValidPositions(square.getPiece());
@@ -70,7 +71,7 @@ public class Board {
 	                selected[1] = null;
 	                return 1;
 	        } else if (selected[0] != null && selected[1] == null) {
-	                if (true/* && rulesAdheredTo(selected[0], square) */) {
+	                if (true) {
 	                        selected[1] = square;
 	                        //Move move = selected[0].
 	                        movePiece( selected[0], selected[1],selected[0].getPiece().getMove(selected[1].getPosition()));
@@ -93,7 +94,9 @@ public class Board {
 	                return false;
 	        if(move == null)
 	              return false;
-	       
+	        if(!controller.isTurn(from.getPiece().getTrueColour())){
+	        	return false;
+	        }
 	        if (to.hasPiece() && from.hasPiece() && move.isTakeMove()) { //if there is a piece where we want to go.
 	                valid = false;
 	                return takePiece(from, to, move);
@@ -111,6 +114,7 @@ public class Board {
 	                to.getPiece().incrementMoves();
 	                to.getPiece().findValidPositions();
 	                from.addPiece(null);
+	                controller.nextPlayer();
 	                 checkPromotion(to.getPiece());
 	        }
 	        
@@ -136,6 +140,11 @@ public class Board {
 	        if (from.getPiece().getColour() == to.getPiece().getColour())
 	                valid = false;// from.getPiece().getColour() ==
 	                                                // to.getPiece().getColour()
+	        if(!controller.isTurn(from.getPiece().getTrueColour())){
+	        	valid = false;
+	        	
+	        if(!move.isTakeMove())
+	        	valid = false;
 	        if (valid) {
 	 
 	                boolean takenColour = to.getPiece().getColour();
@@ -154,6 +163,7 @@ public class Board {
 	                to.getPiece().setPosition(to.getPosition());//Update position of piece to the position of the new square
 	                to.getPiece().findValidPositions();
 	                from.addPiece(null);
+	                controller.nextPlayer();
 	                 checkPromotion(to.getPiece());
 	                //System.out.println("Piece Taken!");
 	        }

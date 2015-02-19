@@ -32,11 +32,14 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	public JMenuItem onlineHelp;
 	private SidePanel sidePanel1;
 	private SidePanel sidePanel2;
-
-	public ChessboardGUI() {
+	private Controller controller;
+	
+	public ChessboardGUI(Controller controller) {
+		this.controller = controller;
+		
+		board = new Board(controller);
 		sidePanel1 = new SidePanel(board);
 		sidePanel2 = new SidePanel(board);
-		board = new Board();
 		setUp();
 		board.setupPieces();
 		menuBar = new JMenuBar();
@@ -124,9 +127,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		}
 	}
 
-	public static void main(String[] args) {
-		ChessboardGUI chess = new ChessboardGUI();
-	}
+	
 
 	private void setUp() {
 		for (int i = 0; i < board.BOARDLENGTH; i++) {

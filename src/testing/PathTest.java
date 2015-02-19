@@ -1,4 +1,4 @@
-package pathing;
+package testing;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -19,6 +19,9 @@ import javax.swing.JFrame;
 import org.newdawn.slick.util.pathfinding.AStarPathFinder;
 import org.newdawn.slick.util.pathfinding.Path;
 import org.newdawn.slick.util.pathfinding.PathFinder;
+
+import pathing.BoardMap;
+import pathing.UnitMover;
 
 /**
  * A simple test to show some path finding at unit
