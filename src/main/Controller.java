@@ -32,4 +32,7 @@ public class Controller {
 	public boolean isTurn(Color playerColour){
 		return (inPlay.getColour() == playerColour);
 	}
+	public ChessboardGUI getGUI(){
+		return gui;
+	}
 }

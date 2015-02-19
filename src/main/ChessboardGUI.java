@@ -146,6 +146,8 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		}
 	}
 
-	
+	public Board getBoard(){
+		return board;
+	}
 
 }

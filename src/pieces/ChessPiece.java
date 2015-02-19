@@ -344,4 +344,11 @@ public class ChessPiece {
 		else return Color.black;
 	}
 
+	public void updateIcon(ImageIcon imageIcon) {
+		setIcon(imageIcon);
+		
+	}
+
+	
+
 }

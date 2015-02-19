@@ -85,7 +85,7 @@ public class Board {
 	        return 1;
 	}
 
-	boolean movePiece(Square from, Square to, Move move) {
+	public boolean movePiece(Square from, Square to, Move move) {
 	        //ChessPiece pieceBeingMoved = from.getPiece();
 	        boolean valid = true;
 	        if (from.getPiece() == null)
@@ -115,7 +115,7 @@ public class Board {
 	                to.getPiece().findValidPositions();
 	                from.addPiece(null);
 	                controller.nextPlayer();
-	                 checkPromotion(to.getPiece());
+	                checkPromotion(to.getPiece());
 	        }
 	        
 	         
@@ -253,8 +253,9 @@ public class Board {
 		ChessPiece newPiece;
 		switch(type){
 		case ROOK:
-			newPiece = new ChessPiece(type, pawn.getColour(), pawn.getPosition(), new ImageIcon("res/RookB.png"), this);
-			pawn =  newPiece;
+			pawn.updateIcon(new ImageIcon("res/RookB.png"));
+			
+			
 			break;
 		case KING:
 			break;
