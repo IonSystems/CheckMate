@@ -5,17 +5,17 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 
 public class Player {
-	Color colour;
+	boolean colour;
 	String name;
 	int rank;
 	int age;
 	ImageIcon profileImage;
 
-	public Player(Color colour){
+	public Player(boolean colour){
 		this.colour = colour;
 	}
 
-	public Color getColour() {
+	public boolean getColour() {
 		return colour;
 	}
 

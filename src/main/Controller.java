@@ -11,14 +11,23 @@ public class Controller {
 	Player whitePlayer;
 	Player blackPlayer;
 	Player inPlay;
-	ChessboardGUI gui;
+	Board board;
 	//TODO: Timer timer;
-	public Controller(){
-		whitePlayer = new Player(Color.WHITE);
-		blackPlayer = new Player(Color.BLACK);
+	private  Controller(){
+		board = new Board();
+		whitePlayer = new Player(true);
+		blackPlayer = new Player(false);
 		inPlay = whitePlayer;
-		gui = new ChessboardGUI(this);
+
 		
+	}
+	
+	public static Controller instance;
+	static {
+		instance = new Controller();
+	}
+	public static Controller getInstance() {
+		return instance;
 	}
 	public void nextPlayer(){
 		if(inPlay == whitePlayer) inPlay = blackPlayer;
@@ -34,43 +43,10 @@ public class Controller {
 	public boolean isTurn(Player player){
 		return (player == inPlay);
 	}
-	public boolean isTurn(Color playerColour){
+	public boolean isTurn(boolean playerColour){
 		return (inPlay.getColour() == playerColour);
 	}
-	public ChessboardGUI getGUI(){
-		return gui;
-	}
 	
-	private static void setupForPromotion(Controller controller){
-		
-		final Board board = controller.getGUI().getBoard();
-		Position pTo = new Position(4,3);
-		Position pFrom = new Position(6,3);
-		Square from = board.getSquare(pFrom);
-		Square to = board.getSquare(pTo);
-		Move move = from.getPiece().getMove(to.getPosition());
-		boolean moveSuccess = board.movePiece(from,to,move);
-		
-		
-		
-		//Move 2 (Black Move 1)
-		pTo = new Position(3,5);
-		pFrom = new Position(1,5);
-		to = board.getSquare(pTo);
-		from = board.getSquare(pFrom);
-		move = from.getPiece().getMove(to.getPosition());
-		moveSuccess = board.movePiece(from,to,move);
-		
-		
-		
-		
-		//Move 3 (White Move 2)
-		pTo = new Position(3,3);
-		pFrom = new Position(4,3);
-		to = board.getSquare(pTo);
-		from = board.getSquare(pFrom);
-		move = from.getPiece().getMove(to.getPosition());
-		moveSuccess = board.movePiece(from,to,move);
-		
-	}
+	
+	
 }

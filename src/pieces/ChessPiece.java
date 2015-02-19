@@ -1,13 +1,7 @@
 package pieces;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-
-import main.Board;
-import main.ChessboardGUI;
 import main.Move;
 import main.Position;
 import main.Square;
@@ -16,8 +10,8 @@ import main.Square;
  * Create a chess piece with it's various attributes
  */
 public class ChessPiece {
-	Board board;
-	ImageIcon image;
+	
+	
 	Position position;
 	final int BOARD_DIMENSION = 8;
 	Piece type;
@@ -38,13 +32,12 @@ public class ChessPiece {
 	 * initY; }
 	 */
 
-	public ChessPiece(Piece type, boolean whitePiece, Position position,
-			ImageIcon image, Board board) {
+	public ChessPiece(Piece type, boolean whitePiece, Position position) {
 		this.type = type;
-		this.image = image;
+		
 		this.position = position;
 		this.whitePiece = whitePiece;
-		this.board = board;
+		
 		possibleMoves = new ArrayList<Move>();
 		validPositions = new ArrayList<Position>();
 		
@@ -183,11 +176,11 @@ public class ChessPiece {
 	 * @param possibleMove
 	 * @return
 	 */
-	private ArrayList<Square> getSquaresOnMove(Move possibleMove) {
+	/*private ArrayList<Square> getSquaresOnMove(Move possibleMove) {
 		ArrayList<Square> squares = new ArrayList<Square>();
 		int x = possibleMove.getX();
 		int y = possibleMove.getY();
-		/*
+		
 		 * If the move x amount is positive, the move goes right, otherwise
 		 * left. If the move y amount is positive, the move goes down, otherwise
 		 * up.
@@ -199,7 +192,7 @@ public class ChessPiece {
 		 * combines the moves of the rook and the bishop, so can move across
 		 * it's row, column and diagonally. The king can move one square in any
 		 * direction, but cannot move to a square resulting in check.
-		 */
+		 
 
 		switch (type) {
 		case KING:
@@ -252,14 +245,14 @@ public class ChessPiece {
 		// }
 
 		return null;
-	}
+	}*/
 
-	private Position addSquareToSquareArray(ArrayList<Square> squares, int x,
+	/*private Position addSquareToSquareArray(ArrayList<Square> squares, int x,
 			int y) {
 		Position t = new Position(position.getX() + x, position.getY() + y);
 		squares.add(board.getSquare( t));
 		return t;
-	}
+	}*/
 
 	private boolean positionWithinBounds(Position possiblePosition) {
 		return possiblePosition.getX() < 8 && possiblePosition.getX() >= 0
@@ -274,9 +267,7 @@ public class ChessPiece {
 		this.type = type;
 	}
 
-	public ImageIcon getIcon() {
-		return this.image;
-	}
+	
 
 	public Piece getType() {
 		return type;

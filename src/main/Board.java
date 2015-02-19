@@ -16,27 +16,23 @@ import pieces.Pawn;
 import pieces.Piece;
 
 public class Board {
-	public JPanel main;
-	Controller controller;
+	
+	
 	public Square[][] squares;
 	public ArrayList<ChessPiece> whiteTaken;
 	public ArrayList<ChessPiece> blackTaken;
 
 	public int BOARDLENGTH;
-	public Square[] selected;
+	
 	public int totalMoves;
 	public Color firstSelected;
 
-	public Board(Controller controller) {
-		this.controller = controller;
+	public Board() {
+		
 		whiteTaken = new ArrayList<ChessPiece>();
         blackTaken = new ArrayList<ChessPiece>();
-        main = new JPanel(new GridLayout(8, 8));
-        main.setSize(1000,1000);
-        main.setMaximumSize(new Dimension(1000,1000));
-        main.setMinimumSize(new Dimension(1000,1000));
         squares = new Square[9][9];
-        selected = new Square[2];
+       
         
 		BOARDLENGTH = 8;
 		this.firstSelected = Color.WHITE;
@@ -45,45 +41,7 @@ public class Board {
         totalMoves = 0;
 	}
 
-	protected int checkMoveable(Square square, ChessPiece chessPiece) {
-	        /*
-	         * square is the square that has been clicked.
-	         * selected[0] is the starting position of the piece.
-	         * selected[1] is the finishing position of the piece.
-	         */
-			
-	        if (selected[0] == null && selected[1] == null) {
-	                if (square.getIcon() != null && square.getPiece().isPlayable() && controller.isTurn(square.getPiece().getTrueColour())) {
-	                        firstSelected = square.getBackground();
-	                        square.setBackground(Color.BLUE);
-	                        highlightValidPositions(square.getPiece());
-	                        selected[0] = square;
-	                        return 0;
-	                }
-	        }
-	        /*
-	         * This should never happen, because as soon as the selected pieces are
-	         * full, the move is made and the selected pieces set back to null
-	         */
-	        else if (selected[0] != null && selected[1] != null) {
-	                movePiece(selected[0], selected[1],selected[0].getPiece().getMove(selected[1].getPosition()));
-	                selected[0] = null;
-	                selected[1] = null;
-	                return 1;
-	        } else if (selected[0] != null && selected[1] == null) {
-	                if (true) {
-	                        selected[1] = square;
-	                        //Move move = selected[0].
-	                        movePiece( selected[0], selected[1],selected[0].getPiece().getMove(selected[1].getPosition()));
-	                        selected[0].setBackground(firstSelected);
-	                        resetSquareColors();
-	                        selected[0] = null;
-	                        selected[1] = null;
-	                        return 1;
-	                }
-	        }
-	        return 1;
-	}
+	
 
 	public boolean movePiece(Square from, Square to, Move move) {
 	        //ChessPiece pieceBeingMoved = from.getPiece();
@@ -94,7 +52,7 @@ public class Board {
 	                return false;
 	        if(move == null)
 	              return false;
-	        if(!controller.isTurn(from.getPiece().getTrueColour())){
+	        if(!Controller.getInstance().isTurn(from.getPiece().getColour())){
 	        	return false;
 	        }
 	        if (to.hasPiece() && from.hasPiece() && move.isTakeMove()) { //if there is a piece where we want to go.
@@ -102,7 +60,7 @@ public class Board {
 	                return takePiece(from, to, move);
 	                //Dead
 	 
-	        }if(to.getBackground() != Color.green) valid = false; //This seems a rather crude way of checking for a valid move.
+	        }//if(to.getBackground() != Color.green) valid = false; //This seems a rather crude way of checking for a valid move.
 	 
 	        /*
 	         * if (from.getIcon() == null || to.getIcon() != null) { return false; }
@@ -114,8 +72,7 @@ public class Board {
 	                to.getPiece().incrementMoves();
 	                to.getPiece().findValidPositions();
 	                from.addPiece(null);
-	                controller.nextPlayer();
-	                main.repaint();
+	                Controller.getInstance().nextPlayer();
 	                checkPromotion(to.getPiece());
 	        }
 	        
@@ -128,7 +85,7 @@ public class Board {
 		System.out.println("checking " + piece.getType() + " at " + piece.getPosition());
 		if(piece.getType() == Piece.PAWN && piece.getPosition().getX() == end){
 			System.out.println("PROMOTION");
-			PawnSelectPane pane = new PawnSelectPane(this,(Pawn)piece);
+			
 			//promote(piece, type);
 		}
 		
@@ -141,7 +98,7 @@ public class Board {
 	        if (from.getPiece().getColour() == to.getPiece().getColour())
 	                valid = false;// from.getPiece().getColour() ==
 	                                                // to.getPiece().getColour()
-	        if(!controller.isTurn(from.getPiece().getTrueColour()))
+	        if(!Controller.getInstance().isTurn(from.getPiece().getColour()))
 	        	valid = false;
 	        	
 	        if(!move.isTakeMove())
@@ -164,8 +121,8 @@ public class Board {
 	                to.getPiece().setPosition(to.getPosition());//Update position of piece to the position of the new square
 	                to.getPiece().findValidPositions();
 	                from.addPiece(null);
-	                controller.nextPlayer();
-	                main.repaint();
+	                Controller.getInstance().nextPlayer();
+	                
 	                 checkPromotion(to.getPiece());
 	                //System.out.println("Piece Taken!");
 	        }
@@ -180,70 +137,54 @@ public class Board {
 	        return squares[position.getX()][position.getY()];
 	}
 	
-	public void highlightValidPositions(ChessPiece piece) {
-		for (Position p : piece.getValidPositions()) {
-			squares[p.getX()][p.getY()].setBackground(Color.GREEN);
-		}
+	
 
-	}
-	public void resetSquareColors() {
-		for (int i = 0; i < BOARDLENGTH; i++) {
-			for (int j = 0; j < BOARDLENGTH; j++) {
-				if (i != 8) {
-					if ((i + j) % 2 == 0) {
-						squares[i][j].setBackground(Color.WHITE);
-					} else {
-						squares[i][j].setBackground(Color.BLACK);
-					}
-				}
-			}
-
-		}
-	}
+	
+	
 	
 	void setupPieces() {
 		squares[7][0].addPiece(new ChessPiece(Piece.ROOK, true,
-				new Position(7, 0), new ImageIcon("res/RookW.png"), this));
+				new Position(7, 0)));
 		squares[7][7].addPiece(new ChessPiece(Piece.ROOK, true,
-				new Position(7, 7), new ImageIcon("res/RookW.png"), this));
+				new Position(7, 7)));
 		squares[0][7].addPiece(new ChessPiece(Piece.ROOK, false,
-				new Position(0, 7), new ImageIcon("res/RookB.png"), this));
+				new Position(0, 7)));
 		squares[0][0].addPiece(new ChessPiece(Piece.ROOK, false,
-				new Position(0, 0), new ImageIcon("res/RookB.png"), this));
+				new Position(0, 0)));
 
 		squares[7][1].addPiece(new ChessPiece(Piece.KNIGHT, true,
-				new Position(7, 1), new ImageIcon("res/KnightW.png"), this));
+				new Position(7, 1)));
 		squares[7][6].addPiece(new ChessPiece(Piece.KNIGHT, true,
-				new Position(7, 6), new ImageIcon("res/KnightW.png"), this));
+				new Position(7, 6)));
 		squares[0][6].addPiece(new ChessPiece(Piece.KNIGHT, false,
-				new Position(0, 6), new ImageIcon("res/KnightB.png"), this));
+				new Position(0, 6)));
 		squares[0][1].addPiece(new ChessPiece(Piece.KNIGHT, false,
-				new Position(0, 1), new ImageIcon("res/KnightB.png"), this));
+				new Position(0, 1)));
 
 		squares[7][2].addPiece(new ChessPiece(Piece.BISHOP, true,
-				new Position(7, 2), new ImageIcon("res/BishopW.png"), this));
+				new Position(7, 2)));
 		squares[7][5].addPiece(new ChessPiece(Piece.BISHOP, true,
-				new Position(7, 5), new ImageIcon("res/BishopW.png"), this));
+				new Position(7, 5)));
 		squares[0][5].addPiece(new ChessPiece(Piece.BISHOP, false,
-				new Position(0, 5), new ImageIcon("res/BishopB.png"), this));
+				new Position(0, 5)));
 		squares[0][2].addPiece(new ChessPiece(Piece.BISHOP, false,
-				new Position(0, 2), new ImageIcon("res/BishopB.png"), this));
+				new Position(0, 2)));
 
 		squares[7][3].addPiece(new ChessPiece(Piece.KING, true,
-				new Position(7, 3), new ImageIcon("res/KingW.png"), this));
+				new Position(7, 3)));
 		squares[7][4].addPiece(new ChessPiece(Piece.QUEEN, true,
-				new Position(7, 4), new ImageIcon("res/QueenW.png"), this));
+				new Position(7, 4)));
 		squares[0][3].addPiece(new ChessPiece(Piece.KING, false,
-				new Position(0, 3), new ImageIcon("res/KingB.png"), this));
+				new Position(0, 3)));
 		squares[0][4].addPiece(new ChessPiece(Piece.QUEEN, false,
-				new Position(0, 4), new ImageIcon("res/QueenB.png"), this));
+				new Position(0, 4)));
 		for (int i = 0; i <= 7; i++) {
 			squares[6][i].addPiece(new Pawn(Piece.PAWN, true,
 					new Position(6, i), new ImageIcon("res/PawnW.png"), this));
 			squares[1][i].addPiece(new Pawn(Piece.PAWN, false,
 					new Position(1, i), new ImageIcon("res/PawnB.png"), this));
 		}
-		
+		System.out.println("Board set up");
 		
 
 	}
@@ -255,7 +196,7 @@ public class Board {
 		ChessPiece newPiece;
 		switch(type){
 		case ROOK:
-			pawn.updateIcon(new ImageIcon("res/RookB.png"));
+		
 			
 			
 			break;
