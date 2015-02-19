@@ -115,6 +115,7 @@ public class Board {
 	                to.getPiece().findValidPositions();
 	                from.addPiece(null);
 	                controller.nextPlayer();
+	                main.repaint();
 	                checkPromotion(to.getPiece());
 	        }
 	        
@@ -164,6 +165,7 @@ public class Board {
 	                to.getPiece().findValidPositions();
 	                from.addPiece(null);
 	                controller.nextPlayer();
+	                main.repaint();
 	                 checkPromotion(to.getPiece());
 	                //System.out.println("Piece Taken!");
 	        }

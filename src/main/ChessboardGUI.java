@@ -19,25 +19,14 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	boolean soundOn = true;
 	public Board board;
 	public JMenuBar menuBar;
-	public JMenu options;
-	public JMenu help;
-	public JMenu file;
-	public JMenuItem save;
-	public JMenuItem load;
-	public JMenuItem exit;
-	public JMenuItem difficulty;
-	public JMenuItem sound;
-	public JMenuItem volume;
-	public JMenuItem helpPage;
-	public JMenuItem onlineHelp;
-	private SidePanel sidePanel1;
-	private SidePanel sidePanel2;
-	private Controller controller;
+	public JMenu options,help,file;
+	public JMenuItem save,load,exit,difficulty,sound, volume, helpPage,onlineHelp;
+	private SidePanel sidePanel1,sidePanel2;
 	
-	public ChessboardGUI(Controller controller) {
-		this.controller = controller;
+	
+	public ChessboardGUI(final Controller c) {
 		
-		board = new Board(controller);
+		board = new Board(c);
 		sidePanel1 = new SidePanel(board);
 		sidePanel2 = new SidePanel(board);
 		setUp();
@@ -86,7 +75,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	}
 
 	
-
+	
 	
 
 	// private boolean rulesAdheredTo(Square to, Square from) {
