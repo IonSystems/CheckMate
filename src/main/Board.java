@@ -140,7 +140,7 @@ public class Board {
 	        if (from.getPiece().getColour() == to.getPiece().getColour())
 	                valid = false;// from.getPiece().getColour() ==
 	                                                // to.getPiece().getColour()
-	        if(!controller.isTurn(from.getPiece().getTrueColour())){
+	        if(!controller.isTurn(from.getPiece().getTrueColour()))
 	        	valid = false;
 	        	
 	        if(!move.isTakeMove())
@@ -171,7 +171,7 @@ public class Board {
 	        //System.out.println("Piece to be taken!");
 	        return true;
 	        // TODO Auto-generated method stub
-	 
+	        
 	}
 
 	public Square getSquare(Position position) {

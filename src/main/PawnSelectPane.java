@@ -28,22 +28,22 @@ public class PawnSelectPane extends JWindow implements ActionListener {
 	   else colour = Color.black;
       prepareGUI();
    }
-   public PawnSelectPane(){
-	   this.board = new Board();
+   public PawnSelectPane(Controller controller){
+	   this.board = new Board(controller);
 	  colour = Color.white;
       prepareGUI();
    }
 
    
-public static void main(String[] args){
-	   Board board = new Board();
+//public static void main(String[] args){
+	   //Board board = new Board();
 	   //board.setupPieces();
 	  // board.movePiece(board.getSquare(new Position(6, 5)),board.getSquare(new Position(4,5)), new Move(-2,0));
 	   //ImageIcon pi = new ImageIcon("res/PawnW.png");
 	   //Pawn pawn = new Pawn(Piece.PAWN, null, null, board);
-      PawnSelectPane  p = new PawnSelectPane();  
+      //PawnSelectPane  p = new PawnSelectPane();  
       //PawnSelectPane.showJWindowDemo();
-   }
+  // }
 
    private void prepareGUI(){
       mainFrame = new JFrame("Promotion Window");
