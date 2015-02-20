@@ -3,6 +3,7 @@ package main;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -271,6 +272,16 @@ public class Board {
 		}
 		
 	}
-	
+	public void click(int x, int y){
+		MouseEvent e = new MouseEvent(main, y, y, y, y, y, y, false);
+		squares[x][y].mouseClicked(e);
+		
+	}
+
+	public void clearClicks() {
+		selected[0] = null;
+		selected[1] = null;
+		
+	}
 
 }

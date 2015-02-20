@@ -345,7 +345,7 @@ public class ChessPiece {
 	}
 
 	public void updateIcon(ImageIcon imageIcon) {
-		setIcon(imageIcon);
+		this.image = (imageIcon);
 		
 	}
 

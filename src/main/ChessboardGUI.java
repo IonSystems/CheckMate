@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -138,5 +139,11 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 	public Board getBoard(){
 		return board;
 	}
+
+
+
+
+
+	
 
 }

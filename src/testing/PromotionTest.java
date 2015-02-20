@@ -12,9 +12,40 @@ import org.junit.Test;
 import pieces.Piece;
 
 public class PromotionTest {
-
+	
 	
 	@Test
+	public void ClickTest(){
+		Controller controller = new Controller();
+		final Board board = controller.getGUI().getBoard();
+		sleep(1000);
+		move(board,6,3,4,3); //white pawn
+		sleep(1000);
+		move(board,1,5,3,5); //black pawn
+		sleep(1000);
+		move(board,4,3,3,3); //white pawn
+		sleep(1000);
+		move(board,3,5,4,5); //black pawn
+		sleep(1000);
+		move(board,3,3,2,3); //white pawn
+		sleep(1000);
+		move(board,4,5,5,5); //black pawn
+		sleep(1000);
+		move(board,2,3,1,4); //white pawn
+		sleep(1000);
+		move(board,5,5,6,6); //black pawn
+		sleep(1000);
+		move(board,1,4,0,3); //white pawn ready for promotion
+		sleep(1000);
+		move(board,6,6,7,5); //black pawn ready for promotion
+		sleep(1000);
+		
+	}
+	private void move(Board board,int x1, int y1, int x2, int y2){
+		board.clearClicks();
+		board.click(x1,y1);
+		board.click(x2,y2);
+	}
 	public void promotionTest(){
 		//Move 1 (White Move 1)
 		Controller controller = new Controller();
@@ -25,10 +56,11 @@ public class PromotionTest {
 		Square to = board.getSquare(pTo);
 		Move move = from.getPiece().getMove(to.getPosition());
 		boolean moveSuccess = board.movePiece(from,to,move);
-		sleep(1000);
-		//Tests for Move 1
-		assertTrue("Move 1 must be a success", moveSuccess);
 		
+		//Tests for Move 1
+		
+		assertTrue("Move 1 must be a success", moveSuccess);
+		sleep(1000);
 		//Move 2 (Black Move 1)
 		pTo = new Position(3,5);
 		pFrom = new Position(1,5);
