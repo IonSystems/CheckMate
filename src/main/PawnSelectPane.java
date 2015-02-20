@@ -8,7 +8,7 @@ import javax.swing.*;
 import pieces.Pawn;
 import pieces.Piece;
 
-public class PawnSelectPane extends JWindow implements ActionListener {
+public class PawnSelectPane extends JWindow implements ActionListener,Runnable {
 	/**
 	 * 
 	 */
@@ -90,11 +90,17 @@ public class PawnSelectPane extends JWindow implements ActionListener {
    }
 public void actionPerformed(ActionEvent e) {
 	if(e.getSource() == rook){
-		dispose();
 		System.out.println("Rook");
 		board.promote(pawn, Piece.ROOK);
-		//System.exit(0);
+	
+		board.closePane();
+		
+		//dispose();
 	}
+	
+}
+public void run() {
+	// TODO Auto-generated method stub
 	
 }
 

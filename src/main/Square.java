@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import pieces.ChessPiece;
+import pieces.Piece;
 
 /**
  * Square class for chess
@@ -81,6 +82,11 @@ public class Square extends JLabel implements MouseListener {
 		if(piece != null) System.out.println(piece.printValidPositions());
 		board.checkMoveable(this, this.getPiece());
 
+	}
+	public void setPiece(ChessPiece piece){
+		this.piece = piece;
+		mousePressed(new MouseEvent(this, BOARDLENGTH, 434l, BOARDLENGTH, BOARDLENGTH, BOARDLENGTH, BOARDLENGTH, selected));
+		System.out.println("Square updated");
 	}
 
 	public void mousePressed(MouseEvent e) {

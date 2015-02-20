@@ -72,6 +72,7 @@ public class ChessboardGUI extends JFrame implements ActionListener {
 		add(sidePanel1,BorderLayout.WEST);
 		add(board.main,BorderLayout.CENTER);
 		add(sidePanel2,BorderLayout.EAST);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setVisible(true);
 	}
 

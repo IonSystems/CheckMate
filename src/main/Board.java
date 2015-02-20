@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -23,6 +24,8 @@ public class Board {
 	public ArrayList<ChessPiece> whiteTaken;
 	public ArrayList<ChessPiece> blackTaken;
 
+	PawnSelectPane pane; 
+	
 	public int BOARDLENGTH;
 	public Square[] selected;
 	public int totalMoves;
@@ -129,7 +132,7 @@ public class Board {
 		System.out.println("checking " + piece.getType() + " at " + piece.getPosition());
 		if(piece.getType() == Piece.PAWN && piece.getPosition().getX() == end){
 			System.out.println("PROMOTION");
-			PawnSelectPane pane = new PawnSelectPane(this,(Pawn)piece);
+			new Thread(new PawnSelectPane(this,(Pawn)piece));
 			//promote(piece, type);
 		}
 		
@@ -256,8 +259,8 @@ public class Board {
 		ChessPiece newPiece;
 		switch(type){
 		case ROOK:
-			pawn.updateIcon(new ImageIcon("res/RookB.png"));
-			
+			//pawn.updateIcon();
+			//squares[pawn.getPosition().getX()][pawn.getPosition().getY()].setPiece(new ChessPiece(Piece.ROOK, pawn.getColour(), pawn.getPosition(), new ImageIcon("res/RookB.png"), this));
 			
 			break;
 		case KING:
@@ -282,6 +285,13 @@ public class Board {
 		selected[0] = null;
 		selected[1] = null;
 		
+	}
+	
+	public void closePane(){
+		if(pane != null){
+			pane.dispose();
+			pane = null;
+		}
 	}
 
 }
